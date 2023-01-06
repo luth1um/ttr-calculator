@@ -15,7 +15,7 @@ function App() {
           </Card.Text>
         </Card.Body>
       </Card>
-      <Button variant="primary">Primary</Button>{' '}
+      <Button variant="primary">Primary</Button>
     </div>
   );
 }

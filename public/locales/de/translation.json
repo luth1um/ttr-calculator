@@ -1,5 +1,12 @@
 {
   "app.title": "TTR-Rechner",
-  "explanation.header": "How To",
-  "explanation.text": "Hier steht Text."
+  "explanation.header": "Erklärung",
+  "explanation.text": "Hier steht Text.",
+  "explanation.link-sources": "Quellcode der App",
+  "calculator-form.header": "Rechner",
+  "calculator-form.player.title": "Spieler:in",
+  "calculator-form.player.text": "Hier steht Text.",
+  "calculator-form.opponents.title": "Gegner:innen",
+  "calculator-form.opponents.text": "Hier steht Text.",
+  "calculator-form.opponents.opponent-subtitle": "Gegner:in"
 }

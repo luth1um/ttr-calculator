@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
+import { useTranslation } from "react-i18next";
 import { HowTo } from "./how-to/HowTo";
 
 function doNothing(): void {
@@ -7,9 +8,11 @@ function doNothing(): void {
 }
 
 function App() {
+  const { t } = useTranslation();
+
   return (
     <div>
-      <h1>🏓 TTR Calculator</h1>
+      <h1>🏓 {t("app.title")}</h1>
       <HowTo />
       <Button variant="primary" onClick={() => doNothing()}>
         Primary

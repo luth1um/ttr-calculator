@@ -2,6 +2,7 @@
   "name": "ttr-calculator",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/ttr-calculator",
   "dependencies": {
     "bootstrap": "5.2.3",
     "react": "18.2.0",

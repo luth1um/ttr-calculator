@@ -8,5 +8,7 @@
   "calculator-form.player.text": "Hier steht Text.",
   "calculator-form.opponents.title": "Gegner:innen",
   "calculator-form.opponents.text": "Hier steht Text.",
-  "calculator-form.opponents.opponent-subtitle": "Gegner:in"
+  "calculator-form.opponents.opponent-subtitle": "Gegner:in",
+  "calculator-form.buttons.submit": "Berechnen",
+  "calculator-form.buttons.reset": "Zurücksetzen"
 }

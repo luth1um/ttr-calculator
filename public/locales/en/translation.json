@@ -8,5 +8,7 @@
   "calculator-form.player.text": "This is some text.",
   "calculator-form.opponents.title": "Opponents",
   "calculator-form.opponents.text": "This is some text.",
-  "calculator-form.opponents.opponent-subtitle": "Opponent"
+  "calculator-form.opponents.opponent-subtitle": "Opponent",
+  "calculator-form.buttons.submit": "Submit",
+  "calculator-form.buttons.reset": "Reset"
 }

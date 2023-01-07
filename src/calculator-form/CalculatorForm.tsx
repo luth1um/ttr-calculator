@@ -1,4 +1,4 @@
-import { ListGroup } from "react-bootstrap";
+import { Button, ListGroup } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { useTranslation } from "react-i18next";
 
@@ -29,6 +29,20 @@ export function CalculatorForm() {
         </ListGroup.Item>
         {forms}
       </ListGroup>
+      <Card.Body>
+        <Button className="me-2" variant="primary">
+          +
+        </Button>
+        <Button className="me-2" variant="primary">
+          -
+        </Button>
+        <Button className="me-2" variant="primary">
+          {t("calculator-form.buttons.submit")}
+        </Button>
+        <Button className="me-2" variant="danger">
+          {t("calculator-form.buttons.reset")}
+        </Button>
+      </Card.Body>
     </Card>
   );
 }

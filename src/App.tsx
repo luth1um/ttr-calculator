@@ -4,10 +4,6 @@ import { useTranslation } from "react-i18next";
 import { CalculatorForm } from "./calculator-form/CalculatorForm";
 import { HowTo } from "./how-to/HowTo";
 
-function doNothing(): void {
-  console.log("button clicked");
-}
-
 function App() {
   const { t } = useTranslation();
 
@@ -17,10 +13,6 @@ function App() {
       <HowTo />
       <br />
       <CalculatorForm />
-      <br />
-      <Button variant="primary" onClick={() => doNothing()}>
-        Primary
-      </Button>
     </div>
   );
 }

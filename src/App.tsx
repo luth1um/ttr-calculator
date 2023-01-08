@@ -1,8 +1,7 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
 import { useTranslation } from "react-i18next";
-import { CalculatorForm } from "./calculator-form/CalculatorForm";
-import { HowTo } from "./how-to/HowTo";
+import { CalculatorForm } from "./view/CalculatorForm";
+import { HowTo } from "./view/HowTo";
 
 function App() {
   const { t } = useTranslation();

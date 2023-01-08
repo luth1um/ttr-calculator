@@ -52,11 +52,16 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
   }, []);
 
   const resetCalculatorForm = useCallback((viewModel: CalculatorFormViewModel) => {
-    setViewModel({ ...viewModel, state: CalculatorFormState.RESET, player: {}, opponents: [{}] });
+    setViewModel({
+      ...viewModel,
+      state: CalculatorFormState.RESET,
+      player: {},
+      opponents: [{ ttr: 1000, gameWon: false }],
+    });
   }, []);
 
   const addOpponent = useCallback((viewModel: CalculatorFormViewModel, opponents: Opponent[]) => {
-    opponents.push({ gameWon: false });
+    opponents.push({ ttr: 1000, gameWon: false });
     setViewModel({ ...viewModel, opponents: opponents });
   }, []);
 
@@ -71,7 +76,7 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
   const [viewModel, setViewModel] = useState<CalculatorFormViewModel>({
     state: CalculatorFormState.INIT,
     player: {},
-    opponents: [{ gameWon: false }],
+    opponents: [{ ttr: 1000, gameWon: false }],
     updateCalculatorParams,
     resetCalculatorForm,
     addOpponent,

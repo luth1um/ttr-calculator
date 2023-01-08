@@ -1,14 +1,20 @@
 {
   "app.title": "TTR Calculator",
   "explanation.header": "How To",
-  "explanation.text": "This is some text.",
+  "explanation.text": "TODO: This is some text.",
   "explanation.link-sources": "Source code of this app",
   "calculator-form.header": "Calculator",
   "calculator-form.player.title": "Player",
-  "calculator-form.player.text": "This is some text.",
+  "calculator-form.player.text": "TODO: This is some text.",
+  "calculator-form.ttr": "TT rating",
+  "calculator-form.player.younger-than-21": "younger than 21",
+  "calculator-form.player.younger-than-16": "younger than 16",
+  "calculator-form.player.less-than-30-singles": "less than 30 single games overall",
+  "calculator-form.player.year-break-less-15-singles": "paused for at least one year and less than 15 single games since then",
   "calculator-form.opponents.title": "Opponents",
-  "calculator-form.opponents.text": "This is some text.",
+  "calculator-form.opponents.text": "TODO: This is some text.",
   "calculator-form.opponents.opponent-subtitle": "Opponent",
+  "calculator-form.opponents.game-won": "game won",
   "calculator-form.buttons.submit": "Submit",
   "calculator-form.buttons.reset": "Reset"
 }

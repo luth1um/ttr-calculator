@@ -1,7 +1,12 @@
+import { useCallback } from "react";
 import { Button, Form, ListGroup } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { useTranslation } from "react-i18next";
-import { CalculatorFormState, CalculatorFormViewModel, CalculatorParaNames } from "../CalculatorFormViewModel";
+import {
+  CalculatorFormState,
+  CalculatorFormViewModel,
+  CalculatorParaNames,
+} from "../viewmodel/CalculatorFormViewModel";
 
 interface CalculatorFormProps {
   viewModel: CalculatorFormViewModel;
@@ -10,29 +15,44 @@ interface CalculatorFormProps {
 export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
   const { t } = useTranslation();
   const { viewModel } = props;
-  const { player, opponents } = viewModel;
+  const {
+    state,
+    player,
+    opponents,
+    updateCalculatorParams,
+    submitCalculatorForm,
+    resetCalculatorForm,
+    addOpponent,
+    removeOpponent,
+  } = viewModel;
 
-  const handleInputChange = (event: any) => {
-    const blub = event.currentTarget.value;
-    viewModel.updateCalculatorParams(viewModel, event.currentTarget.name, event.currentTarget.value);
-  };
+  const handleInputChange = useCallback(
+    (event: any) => {
+      updateCalculatorParams(viewModel, event.currentTarget.name, event.currentTarget._valueTracker.getValue());
+    },
+    [viewModel, updateCalculatorParams]
+  );
 
-  const handleReset = () => {
-    viewModel.resetCalculatorForm(viewModel);
-  };
+  const handleSubmit = useCallback(() => {
+    submitCalculatorForm(viewModel);
+  }, [viewModel, submitCalculatorForm]);
 
-  const addOpponent = () => {
-    viewModel.addOpponent(viewModel, opponents);
-  };
+  const handleReset = useCallback(() => {
+    resetCalculatorForm(viewModel);
+  }, [viewModel, resetCalculatorForm]);
 
-  const removeOpponent = () => {
-    viewModel.removeOpponent(viewModel, opponents);
-  };
+  const handleAdd = useCallback(() => {
+    addOpponent(viewModel, opponents);
+  }, [viewModel, opponents, addOpponent]);
 
-  const formatOpponentForms = (): JSX.Element[] => {
+  const handleRemove = useCallback(() => {
+    removeOpponent(viewModel, opponents);
+  }, [viewModel, opponents, removeOpponent]);
+
+  const formatOpponentForms = useCallback((): JSX.Element[] => {
     const opponentForms: JSX.Element[] = [];
     for (let i = 0; i < opponents.length; i++) {
-      const ttrOpponent = opponents[i].ttr;
+      const { ttr } = opponents[i];
       const numberString = opponents.length > 1 ? " " + (i + 1) : "";
       opponentForms.push(
         <ListGroup.Item key={"opponent" + i}>
@@ -41,18 +61,20 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
             <Form.Group className="mb-3" controlId={"gameWon" + i}>
               <Form.Check
                 type="checkbox"
-                disabled={viewModel.state !== CalculatorFormState.READY}
+                disabled={state !== CalculatorFormState.READY}
                 label={t("calculator-form.opponents.game-won")}
+                name={CalculatorParaNames.GAME_WON + i}
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId={"ttrOpponent" + i}>
               <Form.Label hidden={true}>{t("calculator-form.ttr")}</Form.Label>
               <Form.Control
                 type="number"
-                disabled={viewModel.state !== CalculatorFormState.READY}
+                disabled={state !== CalculatorFormState.READY}
                 placeholder={t("calculator-form.ttr") ?? undefined}
                 name={CalculatorParaNames.TTR_OPPONENT + i}
-                value={ttrOpponent}
+                value={ttr !== 0 ? ttr : ""}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -61,7 +83,7 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
       );
     }
     return opponentForms;
-  };
+  }, [state, opponents, handleInputChange, t]);
 
   return (
     <Card id="calculator-form" border="primary" style={{ maxWidth: "400px" }}>
@@ -75,39 +97,47 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
               <Form.Label hidden={true}>{t("calculator-form.ttr")}</Form.Label>
               <Form.Control
                 type="number"
-                disabled={viewModel.state !== CalculatorFormState.READY}
+                disabled={state !== CalculatorFormState.READY}
                 placeholder={t("calculator-form.ttr") ?? undefined}
                 name={CalculatorParaNames.TTR_PLAYER}
-                value={player.ttr}
+                value={player.ttr !== 0 ? player.ttr : ""}
                 onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formYoungerThan21">
               <Form.Check
                 type="checkbox"
-                disabled={viewModel.state !== CalculatorFormState.READY}
+                disabled={state !== CalculatorFormState.READY}
                 label={t("calculator-form.player.younger-than-21")}
+                name={CalculatorParaNames.YOUNGER_THAN_21}
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formYoungerThan16">
               <Form.Check
                 type="checkbox"
-                disabled={viewModel.state !== CalculatorFormState.READY}
+                disabled={state !== CalculatorFormState.READY}
                 label={t("calculator-form.player.younger-than-16")}
+                name={CalculatorParaNames.YOUNGER_THAN_16}
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formLessThan30SingleGames">
               <Form.Check
                 type="checkbox"
-                disabled={viewModel.state !== CalculatorFormState.READY}
+                disabled={state !== CalculatorFormState.READY}
                 label={t("calculator-form.player.less-than-30-singles")}
+                name={CalculatorParaNames.LESS_THAN_30_GAMES}
+                onChange={handleInputChange}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formLessThan15SingleGamesAfterYearBreak">
               <Form.Check
                 type="checkbox"
-                disabled={viewModel.state !== CalculatorFormState.READY}
+                disabled={state !== CalculatorFormState.READY}
                 label={t("calculator-form.player.year-break-less-15-singles")}
+                name={CalculatorParaNames.YEAR_BREAK_15_GAMES}
+                onChange={handleInputChange}
               />
             </Form.Group>
           </ListGroup.Item>
@@ -120,31 +150,34 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
         <Card.Body>
           <Button
             className="me-2"
-            disabled={viewModel.state !== CalculatorFormState.READY}
+            disabled={state !== CalculatorFormState.READY}
             variant="primary"
-            onClick={addOpponent}
+            type="button"
+            onClick={handleAdd}
           >
             +
           </Button>
           <Button
             className="me-2"
-            disabled={viewModel.state !== CalculatorFormState.READY || opponents.length <= 1}
+            disabled={state !== CalculatorFormState.READY || opponents.length <= 1}
             variant="primary"
-            onClick={removeOpponent}
+            type="button"
+            onClick={handleRemove}
           >
             -
           </Button>
           <Button
             className="me-2"
-            disabled={viewModel.state !== CalculatorFormState.READY}
+            disabled={state !== CalculatorFormState.READY}
             variant="primary"
             type="submit"
+            onClick={handleSubmit}
           >
             {t("calculator-form.buttons.submit")}
           </Button>
           <Button
             className="me-2"
-            disabled={viewModel.state !== CalculatorFormState.READY}
+            disabled={state !== CalculatorFormState.READY}
             variant="danger"
             type="reset"
             onClick={handleReset}

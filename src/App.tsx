@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useCalculatorFormViewModel } from "./CalculatorFormViewModel";
+import { useCalculatorFormViewModel } from "./viewmodel/CalculatorFormViewModel";
 import { CalculatorForm } from "./view/CalculatorForm";
 import { HowTo } from "./view/HowTo";
 

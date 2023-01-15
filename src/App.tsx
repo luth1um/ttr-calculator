@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { HowTo } from "./view/HowTo";
 import { OpponentsForm } from "./view/OpponentsForm";
 import { PlayerForm } from "./view/PlayerForm";
+import { Result } from "./view/Result";
 import { useCalculatorFormViewModel } from "./viewmodel/CalculatorFormViewModel";
 
 function App() {
@@ -19,6 +20,8 @@ function App() {
         <br />
         <OpponentsForm viewModel={calculatorFormViewModel} />
       </Form>
+      <br />
+      <Result viewModel={calculatorFormViewModel} />
     </div>
   );
 }

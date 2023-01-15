@@ -55,25 +55,21 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
     if (name === CalculatorParaNames.TTR_PLAYER) {
       const ttr = value ? parseInt(value) : 0;
       updatedPlayer = { ...updatedPlayer, ttRating: ttr };
-      console.log('TTR player: ', ttr); // TODO: remove line
     }
 
     if (name === CalculatorParaNames.YOUNGER_THAN_21) {
       const isYoungerThan21 = value === 'true' ? true : false;
       updatedPlayer = { ...updatedPlayer, isYoungerThan21: isYoungerThan21 };
-      console.log('Is player younger than 21? ', isYoungerThan21); // TODO: remove line
     }
 
     if (name === CalculatorParaNames.YOUNGER_THAN_16) {
       const isYoungerThan16 = value === 'true' ? true : false;
       updatedPlayer = { ...updatedPlayer, isYoungerThan16: isYoungerThan16 };
-      console.log('Is player younger than 16? ', isYoungerThan16); // TODO: remove line
     }
 
     if (name === CalculatorParaNames.LESS_THAN_30_GAMES) {
       const hasLessThan30Games = value === 'true' ? true : false;
       updatedPlayer = { ...updatedPlayer, lessThan30SingleGames: hasLessThan30Games };
-      console.log('Does the player have less than 30 games overall? ', hasLessThan30Games); // TODO: remove line
     }
 
     if (name === CalculatorParaNames.YEAR_BREAK_15_GAMES) {
@@ -82,10 +78,6 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
         ...updatedPlayer,
         lessThan15SingleGamesOverallOrAfterYearBreak: hasLessThan15GamesAfterYearBreak,
       };
-      console.log(
-        'Does the player have less than 15 games after a break of at least one year? ',
-        hasLessThan15GamesAfterYearBreak
-      ); // TODO: remove line
     }
 
     if (name.startsWith(CalculatorParaNames.GAME_WON)) {
@@ -93,7 +85,6 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
       const opponentNumber = parseInt(opponentNumberString);
       const gameWon = value === 'true' ? true : false;
       updatedOpponents[opponentNumber] = { ...updatedOpponents[opponentNumber], gameWasWon: gameWon };
-      console.log('Game won against opponent ' + opponentNumber + '? ', gameWon); // TODO: remove line
     }
 
     if (name.startsWith(CalculatorParaNames.TTR_OPPONENT)) {
@@ -101,7 +92,6 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
       const opponentNumber = parseInt(opponentNumberString);
       const ttr = value ? parseInt(value) : 0;
       updatedOpponents[opponentNumber] = { ...updatedOpponents[opponentNumber], opponentTTRating: ttr };
-      console.log('TTR opponent ' + opponentNumber + ': ', ttr); // TODO: remove line
     }
 
     // =================================================================================================================
@@ -171,7 +161,6 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
   useEffect(() => {
     if (viewModel.state === CalculatorFormState.CALCULATING) {
       const result = calculateTTRatingMultipeOpponents(viewModel.player, viewModel.opponents);
-      console.log('Result: ', result); // TODO: remove line
       setViewModel({ ...viewModel, state: CalculatorFormState.READY, calculationResult: result });
     }
   }, [viewModel]);

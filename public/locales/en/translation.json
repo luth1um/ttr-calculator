@@ -17,5 +17,13 @@
   "calculator-form.buttons.submit": "Submit",
   "calculator-form.buttons.reset": "Reset",
   "calculator-form.invalid.player-ttr": "Please provide a valid TT rating.",
-  "calculator-form.invalid.opponent-ttr": "Please provide a valid TT rating for opponent {{number}}."
+  "calculator-form.invalid.opponent-ttr": "Please provide a valid TT rating for opponent {{number}}.",
+  "result.title": "Result",
+  "result.initially-no-result": "To get a result, fill out the form above and click the <i>Submit</i> button.",
+  "result.ttr-updated": "updated TT rating: {{value}}",
+  "result.ttr-change_one": "change: {{count}} points",
+  "result.ttr-change_other": "change: {{count}} points",
+  "result.winning-expectation_one": "winning expectation: {{count}} games",
+  "result.winning-expectation_other": "winning expectation: {{count}} games",
+  "result.expectation-opponent": "Winning expectation against opponent {{number}}: {{expectation}}"
 }

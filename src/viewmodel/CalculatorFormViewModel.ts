@@ -1,10 +1,12 @@
 import { useCallback, useEffect, useState } from 'react';
-import { calculateTTRatingMultipeOpponents, TTGame, TTPlayer } from 'ttr-calculator-typescript';
+import { calculateTTRatingMultipeOpponents, TTGame, TTPlayer, TTRCalculationResult } from 'ttr-calculator-typescript';
 
 export interface CalculatorFormViewModel {
   state: CalculatorFormState;
   player: TTPlayer;
   opponents: TTGame[];
+  allInputsValid: boolean;
+  calculationResult?: TTRCalculationResult;
 
   updateCalculatorParams: (viewModel: CalculatorFormViewModel, name?: string, value?: string) => void;
   submitCalculatorForm: (viewModel: CalculatorFormViewModel) => void;
@@ -30,6 +32,9 @@ export enum CalculatorParaNames {
   GAME_WON = 'GAME_WON_',
 }
 
+export const MIN_TTR = 1;
+export const MAX_TTR = 3500;
+
 export function useCalculatorFormViewModel(): CalculatorFormViewModel {
   const updateCalculatorParams = useCallback((viewModel: CalculatorFormViewModel, name?: string, value?: string) => {
     if (!name) {
@@ -43,6 +48,9 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
 
     let updatedPlayer = { ...player };
     let updatedOpponents = [...opponents];
+
+    // =================================================================================================================
+    // update inputs
 
     if (name === CalculatorParaNames.TTR_PLAYER) {
       const ttr = value ? parseInt(value) : 0;
@@ -96,7 +104,24 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
       console.log('TTR opponent ' + opponentNumber + ': ', ttr); // TODO: remove line
     }
 
-    setViewModel({ ...viewModel, player: updatedPlayer, opponents: updatedOpponents });
+    // =================================================================================================================
+    // update validity of inputs
+
+    const playerValid = updatedPlayer.ttRating >= MIN_TTR && updatedPlayer.ttRating <= MAX_TTR;
+    const opponentsValid = updatedOpponents
+      .map((opponent) => opponent.opponentTTRating)
+      .reduce((validAll, ttr) => validAll && ttr >= MIN_TTR && ttr <= MAX_TTR, true);
+    const updatedAllInputsValid = playerValid && opponentsValid;
+
+    // =================================================================================================================
+    // update view model
+
+    setViewModel({
+      ...viewModel,
+      player: updatedPlayer,
+      opponents: updatedOpponents,
+      allInputsValid: updatedAllInputsValid,
+    });
   }, []);
 
   const submitCalculatorForm = useCallback((viewModel: CalculatorFormViewModel) => {
@@ -125,6 +150,8 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
     state: CalculatorFormState.INIT,
     player: { ttRating: 1000 },
     opponents: [{ opponentTTRating: 1000, gameWasWon: false }],
+    allInputsValid: true,
+    calculationResult: undefined,
     updateCalculatorParams: updateCalculatorParams,
     submitCalculatorForm: submitCalculatorForm,
     resetCalculatorForm: resetCalculatorForm,
@@ -143,12 +170,9 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
 
   useEffect(() => {
     if (viewModel.state === CalculatorFormState.CALCULATING) {
-      // TODO: also check validity before calculating
-      // TODO: calculate and do stuff
-      console.log('Some pretty cool calculation stuff is happening...');
       const result = calculateTTRatingMultipeOpponents(viewModel.player, viewModel.opponents);
-      console.log('Result: ', result);
-      setViewModel({ ...viewModel, state: CalculatorFormState.READY });
+      console.log('Result: ', result); // TODO: remove line
+      setViewModel({ ...viewModel, state: CalculatorFormState.READY, calculationResult: result });
     }
   }, [viewModel]);
 
@@ -159,6 +183,8 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
         state: CalculatorFormState.READY,
         player: { ttRating: 1000 },
         opponents: [{ opponentTTRating: 1000, gameWasWon: false }],
+        allInputsValid: true,
+        calculationResult: undefined,
       });
     }
   }, [viewModel]);

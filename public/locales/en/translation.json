@@ -16,5 +16,7 @@
   "calculator-form.opponents.opponent-subtitle": "Opponent",
   "calculator-form.opponents.game-won": "game won",
   "calculator-form.buttons.submit": "Submit",
-  "calculator-form.buttons.reset": "Reset"
+  "calculator-form.buttons.reset": "Reset",
+  "calculator-form.invalid.player-ttr": "Please provide a valid TT rating.",
+  "calculator-form.invalid.opponent-ttr": "Please provide a valid TT rating for opponent {{number}}."
 }

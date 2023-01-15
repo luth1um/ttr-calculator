@@ -16,5 +16,7 @@
   "calculator-form.opponents.opponent-subtitle": "Gegner:in",
   "calculator-form.opponents.game-won": "Einzel gewonnen",
   "calculator-form.buttons.submit": "Berechnen",
-  "calculator-form.buttons.reset": "Zurücksetzen"
+  "calculator-form.buttons.reset": "Zurücksetzen",
+  "calculator-form.invalid.player-ttr": "Bitte einen gültigen TTR-Wert eingeben.",
+  "calculator-form.invalid.opponent-ttr": "Bitte einen gültigen TTR-Wert eingeben."
 }

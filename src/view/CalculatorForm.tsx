@@ -6,6 +6,8 @@ import {
   CalculatorFormState,
   CalculatorFormViewModel,
   CalculatorParaNames,
+  MAX_TTR,
+  MIN_TTR,
 } from "../viewmodel/CalculatorFormViewModel";
 
 interface CalculatorFormProps {
@@ -19,6 +21,7 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
     state,
     player,
     opponents,
+    allInputsValid,
     updateCalculatorParams,
     submitCalculatorForm,
     resetCalculatorForm,
@@ -78,10 +81,14 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
                   disabled={state !== CalculatorFormState.READY}
                   placeholder={t("calculator-form.ttr") ?? undefined}
                   name={CalculatorParaNames.TTR_OPPONENT + i}
-                  value={opponents[i].opponentTTRating !== 0 ? opponents[i].opponentTTRating : ""}
+                  value={opponentTTRating !== 0 ? opponentTTRating : ""}
                   onChange={handleInputChange}
                   onFocus={handleFocus}
+                  isInvalid={opponentTTRating < MIN_TTR || opponentTTRating > MAX_TTR}
                 />
+                <Form.Control.Feedback type="invalid">
+                  {t("calculator-form.invalid.opponent-ttr", { number: i + 1 })}
+                </Form.Control.Feedback>
               </FloatingLabel>
             </Form.Group>
           </Card.Body>
@@ -109,7 +116,9 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
                   value={player.ttRating !== 0 ? player.ttRating : ""}
                   onChange={handleInputChange}
                   onFocus={handleFocus}
+                  isInvalid={player.ttRating < MIN_TTR || player.ttRating > MAX_TTR}
                 />
+                <Form.Control.Feedback type="invalid">{t("calculator-form.invalid.player-ttr")}</Form.Control.Feedback>
               </FloatingLabel>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formYoungerThan21">
@@ -176,7 +185,7 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
           </Button>
           <Button
             className="me-2"
-            disabled={state !== CalculatorFormState.READY}
+            disabled={state !== CalculatorFormState.READY || !allInputsValid}
             variant="primary"
             type="submit"
             onClick={handleSubmit}

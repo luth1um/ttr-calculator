@@ -49,6 +49,10 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
     removeOpponent(viewModel, opponents);
   }, [viewModel, opponents, removeOpponent]);
 
+  const handleFocus = useCallback((event: any) => {
+    event.target.select();
+  }, []);
+
   const formatOpponentForms = useCallback((): JSX.Element[] => {
     const opponentForms: JSX.Element[] = [];
     for (let i = 0; i < opponents.length; i++) {
@@ -76,6 +80,7 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
                 name={CalculatorParaNames.TTR_OPPONENT + i}
                 value={opponentTTRating !== 0 ? opponentTTRating : ""}
                 onChange={handleInputChange}
+                onFocus={handleFocus}
               />
             </Form.Group>
           </Card.Body>
@@ -83,7 +88,7 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
       );
     }
     return opponentForms;
-  }, [state, opponents, handleInputChange, t]);
+  }, [state, opponents, handleInputChange, t, handleFocus]);
 
   return (
     <Card id="calculator-form" border="primary" style={{ maxWidth: "400px" }}>
@@ -102,6 +107,7 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
                 name={CalculatorParaNames.TTR_PLAYER}
                 value={player.ttRating !== 0 ? player.ttRating : ""}
                 onChange={handleInputChange}
+                onFocus={handleFocus}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="formYoungerThan21">

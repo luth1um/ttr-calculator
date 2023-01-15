@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Card, FloatingLabel, Form, ListGroup } from "react-bootstrap";
+import { Card, FloatingLabel, Form } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import {
   CalculatorFormState,

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { TTGame, TTPlayer } from 'ttr-calculator-typescript';
+import { calculateTTRatingMultipeOpponents, TTGame, TTPlayer } from 'ttr-calculator-typescript';
 
 export interface CalculatorFormViewModel {
   state: CalculatorFormState;
@@ -146,6 +146,8 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
       // TODO: also check validity before calculating
       // TODO: calculate and do stuff
       console.log('Some pretty cool calculation stuff is happening...');
+      const result = calculateTTRatingMultipeOpponents(viewModel.player, viewModel.opponents);
+      console.log('Result: ', result);
       setViewModel({ ...viewModel, state: CalculatorFormState.READY });
     }
   }, [viewModel]);

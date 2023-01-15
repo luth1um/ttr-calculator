@@ -8711,6 +8711,11 @@ tsutils@^3.21.0:
   dependencies:
     tslib "^1.8.1"
 
+ttr-calculator-typescript@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/ttr-calculator-typescript/-/ttr-calculator-typescript-1.0.0.tgz#36a5ecd00ee8f516a831420eefdd57791eb6acc3"
+  integrity sha512-WnUU6bPudy/hRJhvAZnIdK8dr+22Q8PCK8YGGiuECsf0CjOkfWiqRIHASM4eSktm41sdKx9Mis8LXEhUcqyYfw==
+
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/type-check/-/type-check-0.4.0.tgz#07b8203bfa7056c0657050e3ccd2c37730bab8f1"

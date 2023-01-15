@@ -52,7 +52,7 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
   const formatOpponentForms = useCallback((): JSX.Element[] => {
     const opponentForms: JSX.Element[] = [];
     for (let i = 0; i < opponents.length; i++) {
-      const { ttr } = opponents[i];
+      const { opponentTTRating } = opponents[i];
       const numberString = opponents.length > 1 ? " " + (i + 1) : "";
       opponentForms.push(
         <ListGroup.Item key={"opponent" + i}>
@@ -74,7 +74,7 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
                 disabled={state !== CalculatorFormState.READY}
                 placeholder={t("calculator-form.ttr") ?? undefined}
                 name={CalculatorParaNames.TTR_OPPONENT + i}
-                value={ttr !== 0 ? ttr : ""}
+                value={opponentTTRating !== 0 ? opponentTTRating : ""}
                 onChange={handleInputChange}
               />
             </Form.Group>
@@ -100,7 +100,7 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
                 disabled={state !== CalculatorFormState.READY}
                 placeholder={t("calculator-form.ttr") ?? undefined}
                 name={CalculatorParaNames.TTR_PLAYER}
-                value={player.ttr !== 0 ? player.ttr : ""}
+                value={player.ttRating !== 0 ? player.ttRating : ""}
                 onChange={handleInputChange}
               />
             </Form.Group>

@@ -1,17 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
-import { Opponent } from '../model/Opponent';
-import { Player } from '../model/Player';
+import { TTGame, TTPlayer } from 'ttr-calculator-typescript';
 
 export interface CalculatorFormViewModel {
   state: CalculatorFormState;
-  player: Player;
-  opponents: Opponent[];
+  player: TTPlayer;
+  opponents: TTGame[];
 
   updateCalculatorParams: (viewModel: CalculatorFormViewModel, name?: string, value?: string) => void;
   submitCalculatorForm: (viewModel: CalculatorFormViewModel) => void;
   resetCalculatorForm: (viewModel: CalculatorFormViewModel) => void;
-  addOpponent: (viewModel: CalculatorFormViewModel, opponents: Opponent[]) => void;
-  removeOpponent: (viewModel: CalculatorFormViewModel, opponents: Opponent[]) => void;
+  addOpponent: (viewModel: CalculatorFormViewModel, opponents: TTGame[]) => void;
+  removeOpponent: (viewModel: CalculatorFormViewModel, opponents: TTGame[]) => void;
 }
 
 export enum CalculatorFormState {
@@ -47,7 +46,7 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
 
     if (name === CalculatorParaNames.TTR_PLAYER) {
       const ttr = value ? parseInt(value) : 0;
-      updatedPlayer = { ...updatedPlayer, ttr: ttr };
+      updatedPlayer = { ...updatedPlayer, ttRating: ttr };
       console.log('TTR player: ', ttr); // TODO: remove line
     }
 
@@ -65,13 +64,16 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
 
     if (name === CalculatorParaNames.LESS_THAN_30_GAMES) {
       const hasLessThan30Games = value === 'true' ? true : false;
-      updatedPlayer = { ...updatedPlayer, hasLessThan30Games: hasLessThan30Games };
+      updatedPlayer = { ...updatedPlayer, lessThan30SingleGames: hasLessThan30Games };
       console.log('Does the player have less than 30 games overall? ', hasLessThan30Games); // TODO: remove line
     }
 
     if (name === CalculatorParaNames.YEAR_BREAK_15_GAMES) {
       const hasLessThan15GamesAfterYearBreak = value === 'true' ? true : false;
-      updatedPlayer = { ...updatedPlayer, hasLessThan15GamesAfterYearBreak: hasLessThan15GamesAfterYearBreak };
+      updatedPlayer = {
+        ...updatedPlayer,
+        lessThan15SingleGamesOverallOrAfterYearBreak: hasLessThan15GamesAfterYearBreak,
+      };
       console.log(
         'Does the player have less than 15 games after a break of at least one year? ',
         hasLessThan15GamesAfterYearBreak
@@ -82,7 +84,7 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
       const opponentNumberString = name.substring(CalculatorParaNames.GAME_WON.length);
       const opponentNumber = parseInt(opponentNumberString);
       const gameWon = value === 'true' ? true : false;
-      updatedOpponents[opponentNumber] = { ...updatedOpponents[opponentNumber], gameWon: gameWon };
+      updatedOpponents[opponentNumber] = { ...updatedOpponents[opponentNumber], gameWasWon: gameWon };
       console.log('Game won against opponent ' + opponentNumber + '? ', gameWon); // TODO: remove line
     }
 
@@ -90,7 +92,7 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
       const opponentNumberString = name.substring(CalculatorParaNames.TTR_OPPONENT.length);
       const opponentNumber = parseInt(opponentNumberString);
       const ttr = value ? parseInt(value) : 0;
-      updatedOpponents[opponentNumber] = { ...updatedOpponents[opponentNumber], ttr: ttr };
+      updatedOpponents[opponentNumber] = { ...updatedOpponents[opponentNumber], opponentTTRating: ttr };
       console.log('TTR opponent ' + opponentNumber + ': ', ttr); // TODO: remove line
     }
 
@@ -105,12 +107,12 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
     setViewModel({ ...viewModel, state: CalculatorFormState.RESET });
   }, []);
 
-  const addOpponent = useCallback((viewModel: CalculatorFormViewModel, opponents: Opponent[]) => {
-    const updatedOpponents = [...opponents, { ttr: 1000, gameWon: false }];
+  const addOpponent = useCallback((viewModel: CalculatorFormViewModel, opponents: TTGame[]) => {
+    const updatedOpponents = [...opponents, { opponentTTRating: 1000, gameWasWon: false }];
     setViewModel({ ...viewModel, opponents: updatedOpponents });
   }, []);
 
-  const removeOpponent = useCallback((viewModel: CalculatorFormViewModel, opponents: Opponent[]) => {
+  const removeOpponent = useCallback((viewModel: CalculatorFormViewModel, opponents: TTGame[]) => {
     if (opponents.length <= 1) {
       return;
     }
@@ -121,8 +123,8 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
 
   const [viewModel, setViewModel] = useState<CalculatorFormViewModel>({
     state: CalculatorFormState.INIT,
-    player: { ttr: 1000 },
-    opponents: [{ ttr: 1000, gameWon: false }],
+    player: { ttRating: 1000 },
+    opponents: [{ opponentTTRating: 1000, gameWasWon: false }],
     updateCalculatorParams: updateCalculatorParams,
     submitCalculatorForm: submitCalculatorForm,
     resetCalculatorForm: resetCalculatorForm,
@@ -153,8 +155,8 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
       setViewModel({
         ...viewModel,
         state: CalculatorFormState.READY,
-        player: { ttr: 1000 },
-        opponents: [{ ttr: 1000, gameWon: false }],
+        player: { ttRating: 1000 },
+        opponents: [{ opponentTTRating: 1000, gameWasWon: false }],
       });
     }
   }, [viewModel]);

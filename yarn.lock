@@ -5012,10 +5012,10 @@ i18next-http-backend@2.1.1:
   dependencies:
     cross-fetch "3.1.5"
 
-i18next@22.4.8:
-  version "22.4.8"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-22.4.8.tgz#7a3c5d26a93e8e5f32eee07b58484e2f721fb45b"
-  integrity sha512-XSOy17ZWqflOiJRYE/dzv6vDle2Se32dnHREHb93UnZzZ1+UnvQ8yKtt1fpNL3zvXz5AwCqqixrtTVZmRetaiQ==
+i18next@22.4.9:
+  version "22.4.9"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-22.4.9.tgz#98c8384c6bd41ff937da98b1e809ba03d3b41053"
+  integrity sha512-8gWMmUz460KJDQp/ob3MNUX84cVuDRY9PLFPnV8d+Qezz/6dkjxwOaH70xjrCNDO+JrUL25iXfAIN9wUkInNZw==
   dependencies:
     "@babel/runtime" "^7.20.6"
 
@@ -8711,10 +8711,10 @@ tsutils@^3.21.0:
   dependencies:
     tslib "^1.8.1"
 
-ttr-calculator-typescript@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/ttr-calculator-typescript/-/ttr-calculator-typescript-1.0.0.tgz#36a5ecd00ee8f516a831420eefdd57791eb6acc3"
-  integrity sha512-WnUU6bPudy/hRJhvAZnIdK8dr+22Q8PCK8YGGiuECsf0CjOkfWiqRIHASM4eSktm41sdKx9Mis8LXEhUcqyYfw==
+ttr-calculator-typescript@1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/ttr-calculator-typescript/-/ttr-calculator-typescript-1.0.1.tgz#644a46da6083f8441919187c909d3a0aae8a2305"
+  integrity sha512-VCugnhfHq0T9GYOmr4VJvB1bJf0PDhCGDXzuRW5HifKP1IGwCUbTcb4l4MyuyXwfkS8X5GZ9/xA7iEqn04ezMw==
 
 type-check@^0.4.0, type-check@~0.4.0:
   version "0.4.0"

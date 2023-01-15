@@ -1,10 +1,9 @@
-import React from "react";
-import { useTranslation } from "react-i18next";
-import { useCalculatorFormViewModel } from "./viewmodel/CalculatorFormViewModel";
-import { HowTo } from "./view/HowTo";
 import { Form } from "react-bootstrap";
-import { PlayerForm } from "./view/PlayerForm";
+import { useTranslation } from "react-i18next";
+import { HowTo } from "./view/HowTo";
 import { OpponentsForm } from "./view/OpponentsForm";
+import { PlayerForm } from "./view/PlayerForm";
+import { useCalculatorFormViewModel } from "./viewmodel/CalculatorFormViewModel";
 
 function App() {
   const { t } = useTranslation();

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { Button, Form, ListGroup } from "react-bootstrap";
+import { Button, FloatingLabel, Form, ListGroup } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import { useTranslation } from "react-i18next";
 import {
@@ -72,16 +72,17 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId={"ttrOpponent" + i}>
-              <Form.Label hidden={true}>{t("calculator-form.ttr")}</Form.Label>
-              <Form.Control
-                type="number"
-                disabled={state !== CalculatorFormState.READY}
-                placeholder={t("calculator-form.ttr") ?? undefined}
-                name={CalculatorParaNames.TTR_OPPONENT + i}
-                value={opponentTTRating !== 0 ? opponentTTRating : ""}
-                onChange={handleInputChange}
-                onFocus={handleFocus}
-              />
+              <FloatingLabel controlId="inputTTROpponent" label={t("calculator-form.ttr")} className="mb-3">
+                <Form.Control
+                  type="number"
+                  disabled={state !== CalculatorFormState.READY}
+                  placeholder={t("calculator-form.ttr") ?? undefined}
+                  name={CalculatorParaNames.TTR_OPPONENT + i}
+                  value={opponents[i].opponentTTRating !== 0 ? opponents[i].opponentTTRating : ""}
+                  onChange={handleInputChange}
+                  onFocus={handleFocus}
+                />
+              </FloatingLabel>
             </Form.Group>
           </Card.Body>
         </ListGroup.Item>
@@ -99,16 +100,17 @@ export const CalculatorForm: React.FC<CalculatorFormProps> = (props) => {
             <Card.Title>{t("calculator-form.player.title")}</Card.Title>
             <Card.Text>{t("calculator-form.player.text")}</Card.Text>
             <Form.Group className="mb-3" controlId="formTtrPlayer">
-              <Form.Label hidden={true}>{t("calculator-form.ttr")}</Form.Label>
-              <Form.Control
-                type="number"
-                disabled={state !== CalculatorFormState.READY}
-                placeholder={t("calculator-form.ttr") ?? undefined}
-                name={CalculatorParaNames.TTR_PLAYER}
-                value={player.ttRating !== 0 ? player.ttRating : ""}
-                onChange={handleInputChange}
-                onFocus={handleFocus}
-              />
+              <FloatingLabel controlId="inputTTRPlayer" label={t("calculator-form.ttr")} className="mb-3">
+                <Form.Control
+                  type="number"
+                  disabled={state !== CalculatorFormState.READY}
+                  placeholder={t("calculator-form.ttr") ?? undefined}
+                  name={CalculatorParaNames.TTR_PLAYER}
+                  value={player.ttRating !== 0 ? player.ttRating : ""}
+                  onChange={handleInputChange}
+                  onFocus={handleFocus}
+                />
+              </FloatingLabel>
             </Form.Group>
             <Form.Group className="mb-3" controlId="formYoungerThan21">
               <Form.Check

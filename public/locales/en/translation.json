@@ -23,7 +23,7 @@
   "result.ttr-updated": "updated TT rating: {{value}}",
   "result.ttr-change_one": "change: {{count}} points",
   "result.ttr-change_other": "change: {{count}} points",
-  "result.winning-expectation_one": "winning expectation: {{count}} games",
-  "result.winning-expectation_other": "winning expectation: {{count}} games",
-  "result.expectation-opponent": "Winning expectation against opponent {{number}}: {{expectation}}"
+  "result.winning-expectation_one": "winning expectation: {{count, number}} games",
+  "result.winning-expectation_other": "winning expectation: {{count, number}} games",
+  "result.expectation-opponent": "Winning expectation against opponent {{number}}: {{expectation, number}}"
 }

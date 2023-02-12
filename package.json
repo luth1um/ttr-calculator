@@ -33,7 +33,7 @@
     "prebuild": "yarn clean",
     "build": "BUILD_PATH='./build/ttr-calculator' react-scripts build",
     "predeploy": "yarn build build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build/ttr-calculator",
     "test": "react-scripts test"
   },
   "eslintConfig": {

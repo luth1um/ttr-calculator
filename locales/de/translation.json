@@ -23,7 +23,7 @@
   "result.ttr-updated": "neuer TTR-Wert: {{value}}",
   "result.ttr-change_one": "Änderung: {{count}} Punkt",
   "result.ttr-change_other": "Änderung: {{count}} Punkte",
-  "result.winning-expectation_one": "Gewinnerwartung: {{count}} Spiel",
-  "result.winning-expectation_other": "Gewinnerwartung: {{count}} Spiele",
-  "result.expectation-opponent": "Gewinnerwartung bei Gegner:in {{number}}: {{expectation}}"
+  "result.winning-expectation_one": "Gewinnerwartung: {{count, number}} Spiel",
+  "result.winning-expectation_other": "Gewinnerwartung: {{count, number}} Spiele",
+  "result.expectation-opponent": "Gewinnerwartung bei Gegner:in {{number}}: {{expectation, number}}"
 }

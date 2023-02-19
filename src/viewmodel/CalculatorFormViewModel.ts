@@ -123,7 +123,7 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
   }, []);
 
   const addOpponent = useCallback((viewModel: CalculatorFormViewModel, opponents: TTGame[]) => {
-    const updatedOpponents = [...opponents, { opponentTTRating: 1000, gameWasWon: false }];
+    const updatedOpponents = [...opponents, { opponentTTRating: 1000, gameWasWon: true }];
     setViewModel({ ...viewModel, opponents: updatedOpponents });
   }, []);
 
@@ -139,7 +139,7 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
   const [viewModel, setViewModel] = useState<CalculatorFormViewModel>({
     state: CalculatorFormState.INIT,
     player: { ttRating: 1000 },
-    opponents: [{ opponentTTRating: 1000, gameWasWon: false }],
+    opponents: [{ opponentTTRating: 1000, gameWasWon: true }],
     allInputsValid: true,
     calculationResult: undefined,
     updateCalculatorParams: updateCalculatorParams,
@@ -160,7 +160,16 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
 
   useEffect(() => {
     if (viewModel.state === CalculatorFormState.CALCULATING) {
-      const result = calculateTTRatingMultipeOpponents(viewModel.player, viewModel.opponents);
+      // make sure that a player being younger than 16 is also marked
+      // as being younger than 21 to obtain the correct result
+      let player: TTPlayer;
+      if (viewModel.player.isYoungerThan16) {
+        player = { ...viewModel.player, isYoungerThan21: true };
+      } else {
+        player = { ...viewModel.player };
+      }
+
+      const result = calculateTTRatingMultipeOpponents(player, viewModel.opponents);
       setViewModel({ ...viewModel, state: CalculatorFormState.READY, calculationResult: result });
     }
   }, [viewModel]);
@@ -171,7 +180,7 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
         ...viewModel,
         state: CalculatorFormState.READY,
         player: { ttRating: 1000 },
-        opponents: [{ opponentTTRating: 1000, gameWasWon: false }],
+        opponents: [{ opponentTTRating: 1000, gameWasWon: true }],
         allInputsValid: true,
         calculationResult: undefined,
       });

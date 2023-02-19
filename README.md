@@ -1,3 +1,5 @@
+[![Build](https://github.com/luth1um/ttr-calculator/actions/workflows/build.yml/badge.svg)](https://github.com/luth1um/ttr-calculator/actions/workflows/build.yml)
+
 # 🏓 TTR Calculator
 
 This project is a simple calculator for the Table Tennis Rating (TTR) created with React and TypeScript. All calculations are done directly in the frontend, you don't need any backend to run this app. In case you want to try out the calculator, just visit [this website](https://luth1um.github.io/ttr-calculator/). In case you are only interested in the udnerlying TypeScript calculator, you should visit [this project](https://github.com/luth1um/ttr-calculator-typescript).

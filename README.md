@@ -11,7 +11,8 @@ The usual commands for React projects can be used in this project.
 - `yarn build` to build the app for production
 - `yarn deploy` to build the app and deploy the result to GitHub Pages. In case you fork this project, you might need to adapt the deployment options in the `package.json` file to fit your needs.
 
-# Links
+# 🔗 Links
 
 - [TTR Calculator on GitHub Pages](https://luth1um.github.io/ttr-calculator/)
-- [Underlying TypeScript calculator](https://github.com/luth1um/ttr-calculator-typescript)
+- [Underlying TypeScript calculator (GitHub)](https://github.com/luth1um/ttr-calculator-typescript)
+- [Underlying TypeScript calculator (npm package)](https://www.npmjs.com/package/ttr-calculator-typescript)

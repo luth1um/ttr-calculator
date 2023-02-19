@@ -1,36 +1,17 @@
-# Getting Started with Create React App
+# 🏓 TTR Calculator
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project is a simple calculator for the Table Tennis Rating (TTR) created with React and TypeScript. All calculations are done directly in the frontend, you don't need any backend to run this app. In case you want to try out the calculator, just visit [this website](https://luth1um.github.io/ttr-calculator/). In case you are only interested in the udnerlying TypeScript calculator, you should visit [this project](https://github.com/luth1um/ttr-calculator-typescript).
 
-## Available Scripts
+# 🚀 Quick Start
 
-In the project directory, you can run:
+The usual commands for React projects can be used in this project.
 
-### `yarn start`
+- `yarn install` to install all dependencies
+- `yarn start` to run the app locally for development
+- `yarn build` to build the app for production
+- `yarn deploy` to build the app and deploy the result to GitHub Pages. In case you fork this project, you might need to adapt the deployment options in the `package.json` file to fit your needs.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+# Links
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `yarn test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- [TTR Calculator on GitHub Pages](https://luth1um.github.io/ttr-calculator/)
+- [Underlying TypeScript calculator](https://github.com/luth1um/ttr-calculator-typescript)

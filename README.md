@@ -1,4 +1,4 @@
-[![Build](https://github.com/luth1um/ttr-calculator/actions/workflows/build.yml/badge.svg)](https://github.com/luth1um/ttr-calculator/actions/workflows/build.yml) [![Deployment](https://github.com/luth1um/ttr-calculator/actions/workflows/deploy.yml/badge.svg?branch=release)](https://github.com/luth1um/ttr-calculator/actions/workflows/deploy.yml)
+[![Build](https://github.com/luth1um/ttr-calculator/actions/workflows/build.yml/badge.svg)](https://github.com/luth1um/ttr-calculator/actions/workflows/build.yml) [![Deployment](https://github.com/luth1um/ttr-calculator/actions/workflows/deploy.yml/badge.svg)](https://github.com/luth1um/ttr-calculator/actions/workflows/deploy.yml)
 
 # 🏓 TTR Calculator
 

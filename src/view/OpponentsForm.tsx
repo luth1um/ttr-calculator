@@ -97,7 +97,7 @@ export const OpponentsForm: React.FC<OpponentsFormProps> = (props) => {
   }, [state, opponents, handleInputChange, t, handleFocus]);
 
   return (
-    <Card id="opponents-form" border="primary" style={{ maxWidth: "400px" }}>
+    <Card id="opponents-form" border="primary" style={{ maxWidth: "600px" }}>
       <Card.Header as="h5">{t("calculator-form.opponents.title")}</Card.Header>
       <ListGroup variant="flush">
         <ListGroup.Item>{t("calculator-form.opponents.text")}</ListGroup.Item>

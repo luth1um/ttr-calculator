@@ -57,7 +57,7 @@ export const Result: React.FC<ResultProps> = (props) => {
   }, [calculationResult, t, roundTo3DecimalPlaces]);
 
   return (
-    <Card id="results" border="primary" style={{ maxWidth: "400px" }}>
+    <Card id="results" border="primary" style={{ maxWidth: "600px" }}>
       <Card.Header as="h5">{t("result.title")}</Card.Header>
       <ListGroup variant="flush">{resultContent}</ListGroup>
     </Card>

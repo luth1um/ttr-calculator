@@ -30,7 +30,7 @@ export const PlayerForm: React.FC<PlayerFormProps> = (props) => {
   }, []);
 
   return (
-    <Card id="player-form" border="primary" style={{ maxWidth: "400px" }}>
+    <Card id="player-form" border="primary" style={{ maxWidth: "600px" }}>
       <Card.Header as="h5">{t("calculator-form.player.title")}</Card.Header>
       <Card.Body>
         <Card.Text>{t("calculator-form.player.text")}</Card.Text>

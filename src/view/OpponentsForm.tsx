@@ -57,7 +57,7 @@ export const OpponentsForm: React.FC<OpponentsFormProps> = (props) => {
   const formatOpponentForms = useCallback((): JSX.Element[] => {
     const opponentForms: JSX.Element[] = [];
     for (let i = 0; i < opponents.length; i++) {
-      const { opponentTTRating } = opponents[i];
+      const { opponentTTRating, gameWasWon } = opponents[i];
       const numberString = opponents.length > 1 ? " " + (i + 1) : "";
       opponentForms.push(
         <ListGroup.Item key={"opponent" + i}>
@@ -70,6 +70,7 @@ export const OpponentsForm: React.FC<OpponentsFormProps> = (props) => {
                 label={t("calculator-form.opponents.game-won")}
                 name={CalculatorParaNames.GAME_WON + i}
                 onChange={handleInputChange}
+                checked={gameWasWon}
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId={"ttrOpponent" + i}>

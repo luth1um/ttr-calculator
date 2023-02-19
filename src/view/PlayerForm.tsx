@@ -56,6 +56,7 @@ export const PlayerForm: React.FC<PlayerFormProps> = (props) => {
             label={t("calculator-form.player.younger-than-21")}
             name={CalculatorParaNames.YOUNGER_THAN_21}
             onChange={handleInputChange}
+            checked={player.isYoungerThan21}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formYoungerThan16">
@@ -65,6 +66,7 @@ export const PlayerForm: React.FC<PlayerFormProps> = (props) => {
             label={t("calculator-form.player.younger-than-16")}
             name={CalculatorParaNames.YOUNGER_THAN_16}
             onChange={handleInputChange}
+            checked={player.isYoungerThan16}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formLessThan30SingleGames">
@@ -74,6 +76,7 @@ export const PlayerForm: React.FC<PlayerFormProps> = (props) => {
             label={t("calculator-form.player.less-than-30-singles")}
             name={CalculatorParaNames.LESS_THAN_30_GAMES}
             onChange={handleInputChange}
+            checked={player.lessThan30SingleGames}
           />
         </Form.Group>
         <Form.Group className="mb-3" controlId="formLessThan15SingleGamesAfterYearBreak">
@@ -83,6 +86,7 @@ export const PlayerForm: React.FC<PlayerFormProps> = (props) => {
             label={t("calculator-form.player.year-break-less-15-singles")}
             name={CalculatorParaNames.YEAR_BREAK_15_GAMES}
             onChange={handleInputChange}
+            checked={player.lessThan15SingleGamesOverallOrAfterYearBreak}
           />
         </Form.Group>
       </Card.Body>

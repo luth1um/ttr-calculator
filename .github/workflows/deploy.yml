@@ -10,9 +10,8 @@ permissions:
   contents: write
 
 jobs:
-  on-success:
+  build-and-deploy:
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
       - name: Prepare 🕝
         uses: DerYeger/yarn-setup-action@master

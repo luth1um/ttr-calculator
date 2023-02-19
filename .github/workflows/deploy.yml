@@ -1,4 +1,4 @@
-name: Build
+name: Deploy
 
 on:
   push:
@@ -22,4 +22,6 @@ jobs:
       - uses: DerYeger/yarn-setup-action@master
         with:
           node-version: 18
+      - run: git config user.name github-actions
+      - run: git config user.email github-actions@github.com
       - run: yarn deploy

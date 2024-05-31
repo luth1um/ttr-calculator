@@ -24,9 +24,11 @@
     "@types/node": "20.12.13",
     "@types/react": "18.3.3",
     "@types/react-dom": "18.3.0",
+    "eslint": "9.3.0",
     "gh-pages": "6.1.1",
     "rimraf": "5.0.7",
-    "typescript": "5.4.5"
+    "typescript": "5.4.5",
+    "typescript-eslint": "7.11.0"
   },
   "resolutions": {
     "follow-redirects": "1.15.6",
@@ -39,15 +41,10 @@
     "clean": "rimraf build",
     "prebuild": "yarn clean",
     "build": "BUILD_PATH='./build/ttr-calculator' react-scripts build",
+    "lint": "eslint . --fix --max-warnings 0",
     "predeploy": "yarn build build",
     "deploy": "gh-pages -d build/ttr-calculator",
     "test": "react-scripts test"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
   },
   "browserslist": {
     "production": [

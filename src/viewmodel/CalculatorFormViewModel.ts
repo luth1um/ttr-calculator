@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react';
-import { calculateTTRatingMultipeOpponents, TTGame, TTPlayer, TTRCalculationResult } from 'ttr-calculator-typescript';
+import { TTGame, TTPlayer, TTRCalculationResult, calculateTTRatingMultipeOpponents } from 'ttr-calculator-typescript';
 
 export interface CalculatorFormViewModel {
   state: CalculatorFormState;
@@ -8,7 +8,7 @@ export interface CalculatorFormViewModel {
   allInputsValid: boolean;
   calculationResult?: TTRCalculationResult;
 
-  updateCalculatorParams: (viewModel: CalculatorFormViewModel, name?: string, value?: string) => void;
+  updateCalculatorParams: (viewModel: CalculatorFormViewModel, name?: string, value?: string | boolean) => void;
   submitCalculatorForm: (viewModel: CalculatorFormViewModel) => void;
   resetCalculatorForm: (viewModel: CalculatorFormViewModel) => void;
   addOpponent: (viewModel: CalculatorFormViewModel, opponents: TTGame[]) => void;
@@ -36,83 +36,81 @@ export const MIN_TTR = 1;
 export const MAX_TTR = 3500;
 
 export function useCalculatorFormViewModel(): CalculatorFormViewModel {
-  const updateCalculatorParams = useCallback((viewModel: CalculatorFormViewModel, name?: string, value?: string) => {
-    if (!name) {
-      console.log('Undefined parameter name');
-      return;
-    }
-    const { state, player, opponents } = viewModel;
-    if (state !== CalculatorFormState.READY) {
-      return;
-    }
+  const updateCalculatorParams = useCallback(
+    (viewModel: CalculatorFormViewModel, name?: string, value?: string | boolean) => {
+      if (!name) {
+        console.log('Undefined parameter name');
+        return;
+      }
+      const { state, player, opponents } = viewModel;
+      if (state !== CalculatorFormState.READY) {
+        return;
+      }
 
-    let updatedPlayer = { ...player };
-    let updatedOpponents = [...opponents];
+      let updatedPlayer = { ...player };
+      const updatedOpponents = [...opponents];
 
-    // =================================================================================================================
-    // update inputs
+      // =================================================================================================================
+      // update inputs
 
-    if (name === CalculatorParaNames.TTR_PLAYER) {
-      const ttr = value ? parseInt(value) : 0;
-      updatedPlayer = { ...updatedPlayer, ttRating: ttr };
-    }
+      if (name === CalculatorParaNames.TTR_PLAYER && typeof value === 'string') {
+        const ttr = value ? parseInt(value) : 0;
+        updatedPlayer = { ...updatedPlayer, ttRating: ttr };
+      }
 
-    if (name === CalculatorParaNames.YOUNGER_THAN_21) {
-      const isYoungerThan21 = value === 'true' ? true : false;
-      updatedPlayer = { ...updatedPlayer, isYoungerThan21: isYoungerThan21 };
-    }
+      if (name === CalculatorParaNames.YOUNGER_THAN_21 && typeof value === 'boolean') {
+        updatedPlayer = { ...updatedPlayer, isYoungerThan21: value };
+      }
 
-    if (name === CalculatorParaNames.YOUNGER_THAN_16) {
-      const isYoungerThan16 = value === 'true' ? true : false;
-      updatedPlayer = { ...updatedPlayer, isYoungerThan16: isYoungerThan16 };
-    }
+      if (name === CalculatorParaNames.YOUNGER_THAN_16 && typeof value === 'boolean') {
+        updatedPlayer = { ...updatedPlayer, isYoungerThan16: value };
+      }
 
-    if (name === CalculatorParaNames.LESS_THAN_30_GAMES) {
-      const hasLessThan30Games = value === 'true' ? true : false;
-      updatedPlayer = { ...updatedPlayer, lessThan30SingleGames: hasLessThan30Games };
-    }
+      if (name === CalculatorParaNames.LESS_THAN_30_GAMES && typeof value === 'boolean') {
+        updatedPlayer = { ...updatedPlayer, lessThan30SingleGames: value };
+      }
 
-    if (name === CalculatorParaNames.YEAR_BREAK_15_GAMES) {
-      const hasLessThan15GamesAfterYearBreak = value === 'true' ? true : false;
-      updatedPlayer = {
-        ...updatedPlayer,
-        lessThan15SingleGamesOverallOrAfterYearBreak: hasLessThan15GamesAfterYearBreak,
-      };
-    }
+      if (name === CalculatorParaNames.YEAR_BREAK_15_GAMES && typeof value === 'boolean') {
+        updatedPlayer = {
+          ...updatedPlayer,
+          lessThan15SingleGamesOverallOrAfterYearBreak: value,
+        };
+      }
 
-    if (name.startsWith(CalculatorParaNames.GAME_WON)) {
-      const opponentNumberString = name.substring(CalculatorParaNames.GAME_WON.length);
-      const opponentNumber = parseInt(opponentNumberString);
-      const gameWon = value === 'true' ? true : false;
-      updatedOpponents[opponentNumber] = { ...updatedOpponents[opponentNumber], gameWasWon: gameWon };
-    }
+      if (name.startsWith(CalculatorParaNames.GAME_WON) && typeof value === 'boolean') {
+        const opponentNumberString = name.substring(CalculatorParaNames.GAME_WON.length);
+        const opponentNumber = parseInt(opponentNumberString);
+        updatedOpponents[opponentNumber] = { ...updatedOpponents[opponentNumber], gameWasWon: value };
+      }
 
-    if (name.startsWith(CalculatorParaNames.TTR_OPPONENT)) {
-      const opponentNumberString = name.substring(CalculatorParaNames.TTR_OPPONENT.length);
-      const opponentNumber = parseInt(opponentNumberString);
-      const ttr = value ? parseInt(value) : 0;
-      updatedOpponents[opponentNumber] = { ...updatedOpponents[opponentNumber], opponentTTRating: ttr };
-    }
+      if (name.startsWith(CalculatorParaNames.TTR_OPPONENT) && typeof value === 'string') {
+        const opponentNumberString = name.substring(CalculatorParaNames.TTR_OPPONENT.length);
+        const opponentNumber = parseInt(opponentNumberString);
+        const ttr = value ? parseInt(value) : 0;
+        updatedOpponents[opponentNumber] = { ...updatedOpponents[opponentNumber], opponentTTRating: ttr };
+      }
 
-    // =================================================================================================================
-    // update validity of inputs
+      // =================================================================================================================
+      // update validity of inputs
 
-    const playerValid = updatedPlayer.ttRating >= MIN_TTR && updatedPlayer.ttRating <= MAX_TTR;
-    const opponentsValid = updatedOpponents
-      .map((opponent) => opponent.opponentTTRating)
-      .reduce((validAll, ttr) => validAll && ttr >= MIN_TTR && ttr <= MAX_TTR, true);
-    const updatedAllInputsValid = playerValid && opponentsValid;
+      const playerValid = updatedPlayer.ttRating >= MIN_TTR && updatedPlayer.ttRating <= MAX_TTR;
+      const opponentsValid = updatedOpponents
+        .map((opponent) => opponent.opponentTTRating)
+        .reduce((validAll, ttr) => validAll && ttr >= MIN_TTR && ttr <= MAX_TTR, true);
+      const updatedAllInputsValid = playerValid && opponentsValid;
 
-    // =================================================================================================================
-    // update view model
+      // =================================================================================================================
+      // update view model
 
-    setViewModel({
-      ...viewModel,
-      player: updatedPlayer,
-      opponents: updatedOpponents,
-      allInputsValid: updatedAllInputsValid,
-    });
-  }, []);
+      setViewModel({
+        ...viewModel,
+        player: updatedPlayer,
+        opponents: updatedOpponents,
+        allInputsValid: updatedAllInputsValid,
+      });
+    },
+    []
+  );
 
   const submitCalculatorForm = useCallback((viewModel: CalculatorFormViewModel) => {
     setViewModel({ ...viewModel, state: CalculatorFormState.CALCULATING });

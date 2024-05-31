@@ -28,8 +28,10 @@ export const OpponentsForm: React.FC<OpponentsFormProps> = (props) => {
   } = viewModel;
 
   const handleInputChange = useCallback(
-    (event: any) => {
-      updateCalculatorParams(viewModel, event.currentTarget.name, event.currentTarget._valueTracker.getValue());
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const { name, type, checked, value } = event.currentTarget;
+      const newValue = type === "checkbox" ? checked : value;
+      updateCalculatorParams(viewModel, name, newValue);
     },
     [viewModel, updateCalculatorParams]
   );
@@ -50,7 +52,7 @@ export const OpponentsForm: React.FC<OpponentsFormProps> = (props) => {
     removeOpponent(viewModel, opponents);
   }, [viewModel, opponents, removeOpponent]);
 
-  const handleFocus = useCallback((event: any) => {
+  const handleFocus = useCallback((event: React.FocusEvent<HTMLInputElement>) => {
     event.target.select();
   }, []);
 

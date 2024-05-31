@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/ttr-calculator/static/css/main.d5289b2f.css",
-    "main.js": "/ttr-calculator/static/js/main.1553bd32.js",
+    "main.js": "/ttr-calculator/static/js/main.dec1c3da.js",
     "index.html": "/ttr-calculator/index.html",
-    "static/media/getFetch.cjs": "/ttr-calculator/static/media/getFetch.40f37ddea2378391108f.cjs",
+    "static/media/getFetch.cjs": "/ttr-calculator/static/media/getFetch.c4cca45e22bc1b2c7d0d.cjs",
     "main.d5289b2f.css.map": "/ttr-calculator/static/css/main.d5289b2f.css.map",
-    "main.1553bd32.js.map": "/ttr-calculator/static/js/main.1553bd32.js.map"
+    "main.dec1c3da.js.map": "/ttr-calculator/static/js/main.dec1c3da.js.map"
   },
   "entrypoints": [
     "static/css/main.d5289b2f.css",
-    "static/js/main.1553bd32.js"
+    "static/js/main.dec1c3da.js"
   ]
 }

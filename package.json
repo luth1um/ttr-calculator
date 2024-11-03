@@ -5,7 +5,7 @@
   "homepage": "/ttr-calculator",
   "dependencies": {
     "bootstrap": "5.3.3",
-    "i18next": "23.16.2",
+    "i18next": "23.16.4",
     "i18next-browser-languagedetector": "8.0.0",
     "i18next-http-backend": "2.6.2",
     "react": "18.3.1",
@@ -17,10 +17,10 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "7.21.11",
-    "@types/node": "22.7.8",
-    "@types/react": "18.3.11",
+    "@types/node": "22.8.7",
+    "@types/react": "18.3.12",
     "@types/react-dom": "18.3.1",
-    "eslint": "9.13.0",
+    "eslint": "9.14.0",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-prettier": "5.2.1",
     "gh-pages": "6.2.0",
@@ -29,11 +29,11 @@
     "prettier": "3.3.3",
     "rimraf": "6.0.1",
     "typescript": "5.6.3",
-    "typescript-eslint": "8.11.0"
+    "typescript-eslint": "8.12.2"
   },
   "resolutions": {
     "nth-check": "2.1.1",
-    "postcss": "8.4.39"
+    "postcss": "8.4.47"
   },
   "scripts": {
     "start": "react-scripts start",

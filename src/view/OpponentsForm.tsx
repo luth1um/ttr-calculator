@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import React, { JSX, useCallback } from 'react';
 import { Button, Card, FloatingLabel, Form, ListGroup } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import {

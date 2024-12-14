@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import React, { JSX, useCallback, useMemo } from 'react';
 import { Card, ListGroup } from 'react-bootstrap';
 import { Trans, useTranslation } from 'react-i18next';
 import { CalculatorFormViewModel } from '../viewmodel/CalculatorFormViewModel';

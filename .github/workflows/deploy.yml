@@ -17,8 +17,7 @@ jobs:
       - name: Prepare 🕝
         uses: DerYeger/yarn-setup-action@master
         with:
-          node-version: 22
-
+          node-version: 24
       - name: Build 🔧
         run: yarn build
 

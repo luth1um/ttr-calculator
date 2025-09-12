@@ -14,30 +14,12 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          ref: 'release'
-
-      - name: Setup pnpm
-        uses: pnpm/action-setup@v4
-        with:
-          version: 10
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v5
+      - name: Prepare 🕝
+        uses: DerYeger/yarn-setup-action@master
         with:
           node-version: 24
-          cache: 'pnpm'
-
-      - name: Install
-        run: pnpm install --frozen-lockfile
-
-      - name: Clean-up of the output directory for build
-        run: pnpm clean
-
-      - name: Build
-        run: pnpm build
+      - name: Build 🔧
+        run: yarn build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

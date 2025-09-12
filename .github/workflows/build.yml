@@ -7,19 +7,35 @@ on:
     branches: ['main']
 
 jobs:
-  prepare:
-    name: Prepare 🕝
-    runs-on: ubuntu-latest
-    steps:
-      - uses: DerYeger/yarn-setup-action@master
-        with:
-          node-version: 24
   build:
-    name: Build 🔧
+    name: Build and Check 🔧
     runs-on: ubuntu-latest
-    needs: prepare
     steps:
-      - uses: DerYeger/yarn-setup-action@master
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v5
         with:
           node-version: 24
-      - run: yarn build
+          cache: 'pnpm'
+
+      - name: Install
+        run: pnpm install --frozen-lockfile
+
+      - name: Clean-up of the output directory for build
+        run: pnpm clean
+
+      - name: Lint
+        run: pnpm eslint . --max-warnings 0
+
+      - name: Check formatting
+        run: pnpm prettier --check .
+
+      - name: Build
+        run: pnpm build

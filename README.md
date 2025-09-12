@@ -8,10 +8,10 @@ This project is a simple calculator for the Table Tennis Rating (TTR) created wi
 
 The usual commands for React projects can be used in this project.
 
-- `yarn install` to install all dependencies
-- `yarn start` to run the app locally for development
-- `yarn build` to build the app for production
-- `yarn deploy` to build the app and deploy the result to GitHub Pages. In case you fork this project, you might need to adapt the deployment options in the `package.json` file to fit your needs.
+- `pnpm install` to install all dependencies
+- `pnpm start` to run the app locally for development
+- `pnpm build` to build the app for production
+- `pnpm deploy` to build the app and deploy the result to GitHub Pages. In case you fork this project, you might need to adapt the deployment options in the `package.json` file to fit your needs.
 
 # 🔗 Links
 

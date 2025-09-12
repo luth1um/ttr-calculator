@@ -35,11 +35,10 @@
   "scripts": {
     "start": "react-scripts start",
     "clean": "rimraf build",
-    "prebuild": "yarn clean",
     "build": "BUILD_PATH='./build/ttr-calculator' react-scripts build",
     "format": "prettier --write \"./**/*.{css,html,js,json,md,ts,tsx,yml,yaml}\"",
     "lint": "eslint . --fix --max-warnings 0",
-    "predeploy": "yarn build build",
+    "predeploy": "pnpm clean && pnpm build",
     "deploy": "gh-pages -d build/ttr-calculator",
     "test": "react-scripts test",
     "prepare": "husky"

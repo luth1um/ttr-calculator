@@ -7,17 +7,9 @@ on:
     branches: ['main']
 
 jobs:
-  prepare:
-    name: Prepare 🕝
-    runs-on: ubuntu-latest
-    steps:
-      - uses: DerYeger/yarn-setup-action@master
-        with:
-          node-version: 24
   build:
     name: Build 🔧
     runs-on: ubuntu-latest
-    needs: prepare
     steps:
       - uses: DerYeger/yarn-setup-action@master
         with:

@@ -42,7 +42,7 @@ jobs:
       - name: Build the project
         run: pnpm build
 
-      - name: Deploy 🚀
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: build/ttr-calculator

@@ -9,17 +9,38 @@ on:
 permissions:
   contents: write
 
+env:
+  HUSKY: 0
+  PNPM_VERSION: '10'
+  NODE_VERSION: '24'
+
 jobs:
   on-success:
     runs-on: ubuntu-latest
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     steps:
-      - name: Prepare 🕝
-        uses: DerYeger/yarn-setup-action@master
+      - name: Checkout code
+        uses: actions/checkout@v5
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 24
-      - name: Build 🔧
-        run: yarn build
+          version: ${{ env.PNPM_VERSION }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: 'pnpm'
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Clean-up of the output directory for build
+        run: pnpm clean
+
+      - name: Build the project
+        run: pnpm build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4

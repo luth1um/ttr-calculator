@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   base: '/ttr-calculator/',
   build: {
-    outDir: 'dist/timed-automata-analysis',
+    outDir: 'dist/ttr-calculator',
   },
   server: {
     open: true,

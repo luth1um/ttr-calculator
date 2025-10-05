@@ -12,35 +12,32 @@
     "react-bootstrap": "2.10.10",
     "react-dom": "19.2.0",
     "react-i18next": "16.0.0",
-    "react-scripts": "5.0.1",
     "ttr-calculator-typescript": "1.0.15"
   },
   "devDependencies": {
-    "@babel/plugin-transform-private-property-in-object": "7.27.1",
     "@eslint/js": "9.37.0",
     "@types/node": "24.6.2",
     "@types/react": "19.2.0",
     "@types/react-dom": "19.2.0",
+    "@vitejs/plugin-react": "5.0.4",
     "eslint": "9.37.0",
     "gh-pages": "6.3.0",
     "husky": "9.1.7",
     "lint-staged": "16.2.3",
     "prettier": "3.6.2",
-    "react-app-rewired": "2.2.1",
     "rimraf": "6.0.1",
     "typescript": "5.9.3",
-    "typescript-eslint": "8.45.0"
+    "typescript-eslint": "8.45.0",
+    "vite": "7.1.9"
   },
   "scripts": {
-    "start": "react-app-rewired start",
-    "clean": "rimraf build",
-    "prebuild": "pnpm clean",
-    "build": "BUILD_PATH='./build/ttr-calculator' react-app-rewired build",
+    "start": "vite",
+    "clean": "rimraf dist",
     "format": "prettier --write \"./**/*.{css,html,js,json,md,ts,tsx,yml,yaml}\"",
     "lint": "eslint . --fix --max-warnings 0",
-    "predeploy": "pnpm build build",
-    "deploy": "gh-pages -d build/ttr-calculator",
-    "test": "react-app-rewired test",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist/ttr-calculator",
     "prepare": "husky"
   },
   "lint-staged": {
@@ -50,26 +47,11 @@
     ],
     "*.{css,html,js,json,md,yml,yaml}": "prettier --write"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
   "pnpm": {
     "onlyBuiltDependencies": [
       "core-js",
-      "core-js-pure"
-    ],
-    "overrides": {
-      "postcss@<8.4.31": ">=8.4.31",
-      "nth-check@<2.0.1": ">=2.0.1"
-    }
+      "core-js-pure",
+      "esbuild"
+    ]
   }
 }

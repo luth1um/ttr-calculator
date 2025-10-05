@@ -45,7 +45,7 @@ jobs:
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: build/ttr-calculator
+          folder: dist/ttr-calculator
 
   on-failure:
     runs-on: ubuntu-latest

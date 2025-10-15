@@ -19,7 +19,7 @@
   "calculator-form.invalid.player-ttr": "Bitte einen gültigen TTR-Wert eingeben.",
   "calculator-form.invalid.opponent-ttr": "Bitte einen gültigen TTR-Wert eingeben.",
   "result.title": "Ergebnis",
-  "result.initially-no-result": "Um ein Resultat zu erhalten, müssen die Daten für Spieler:in und Gegner:innen ausgefüllt werden. Danach erhält man mit einem Klick auf den <i>Berechnen</i>-Button das Ergebnis.",
+  "result.initially-no-result": "Um das Ergebnis zu erhalten, müssen die Daten für Spieler:in und Gegner:innen ausgefüllt werden. Danach erhält man mit einem Klick auf den <i>Berechnen</i>-Button das Ergebnis.",
   "result.ttr-updated": "neuer TTR-Wert: {{value}}",
   "result.ttr-change_one": "Änderung: {{count}} Punkt",
   "result.ttr-change_other": "Änderung: {{count}} Punkte",

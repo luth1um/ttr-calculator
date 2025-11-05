@@ -102,6 +102,7 @@ export function useCalculatorFormViewModel(): CalculatorFormViewModel {
       // =================================================================================================================
       // update view model
 
+      // eslint-disable-next-line react-hooks/immutability
       setViewModel({
         ...viewModel,
         player: updatedPlayer,

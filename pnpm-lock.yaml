@@ -12,8 +12,8 @@ importers:
         specifier: 5.3.8
         version: 5.3.8(@popperjs/core@2.11.8)
       i18next:
-        specifier: 25.6.0
-        version: 25.6.0(typescript@5.9.3)
+        specifier: 25.6.1
+        version: 25.6.1(typescript@5.9.3)
       i18next-browser-languagedetector:
         specifier: 8.2.0
         version: 8.2.0
@@ -31,10 +31,10 @@ importers:
         version: 19.2.0(react@19.2.0)
       react-i18next:
         specifier: 16.2.4
-        version: 16.2.4(i18next@25.6.0(typescript@5.9.3))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)
+        version: 16.2.4(i18next@25.6.1(typescript@5.9.3))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3)
       ttr-calculator-typescript:
-        specifier: 1.0.16
-        version: 1.0.16
+        specifier: 1.0.17
+        version: 1.0.17
     devDependencies:
       '@eslint/js':
         specifier: 9.39.1
@@ -50,7 +50,7 @@ importers:
         version: 19.2.2(@types/react@19.2.2)
       '@vitejs/plugin-react':
         specifier: 5.1.0
-        version: 5.1.0(vite@7.2.0(@types/node@24.10.0)(yaml@2.8.1))
+        version: 5.1.0(vite@7.2.2(@types/node@24.10.0)(yaml@2.8.1))
       eslint:
         specifier: 9.39.1
         version: 9.39.1
@@ -79,8 +79,8 @@ importers:
         specifier: 8.46.3
         version: 8.46.3(eslint@9.39.1)(typescript@5.9.3)
       vite:
-        specifier: 7.2.0
-        version: 7.2.0(@types/node@24.10.0)(yaml@2.8.1)
+        specifier: 7.2.2
+        version: 7.2.2(@types/node@24.10.0)(yaml@2.8.1)
 
 packages:
 
@@ -1046,8 +1046,8 @@ packages:
   i18next-http-backend@3.0.2:
     resolution: {integrity: sha512-PdlvPnvIp4E1sYi46Ik4tBYh/v/NbYfFFgTjkwFl0is8A18s7/bx9aXqsrOax9WUbeNS6mD2oix7Z0yGGf6m5g==}
 
-  i18next@25.6.0:
-    resolution: {integrity: sha512-tTn8fLrwBYtnclpL5aPXK/tAYBLWVvoHM1zdfXoRNLcI+RvtMsoZRV98ePlaW3khHYKuNh/Q65W/+NVFUeIwVw==}
+  i18next@25.6.1:
+    resolution: {integrity: sha512-yUWvdXtalZztmKrKw3yz/AvSP3yKyqIkVPx/wyvoYy9lkLmwzItLxp0iHZLG5hfVQ539Jor4XLO+U+NHIXg7pw==}
     peerDependencies:
       typescript: ^5
     peerDependenciesMeta:
@@ -1511,8 +1511,8 @@ packages:
   tslib@2.8.1:
     resolution: {integrity: sha512-oJFu94HQb+KVduSUQL7wnpmqnfmLsOA/nAh6b6EH0wCEoK0/mPeXU6c3wKDV83MkOuHPRHtSXKKU99IBazS/2w==}
 
-  ttr-calculator-typescript@1.0.16:
-    resolution: {integrity: sha512-UKoFJPjjFgrSO/QZtVK3loTsh4xFLtrZK6TK7bPm1IdT/UwjAxXddxzK+c5qm0/rMK5IdpSpeKnQunfqJJ+V/A==}
+  ttr-calculator-typescript@1.0.17:
+    resolution: {integrity: sha512-wsZi8lF9Hfn2L7jWG4bLd0yRyxKtxBM0IhIDOPBA81/jbDGdmEN4jSaFgOmUxuerv3u+rXOI/5OGDu8pKD49MA==}
 
   type-check@0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}
@@ -1561,8 +1561,8 @@ packages:
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
-  vite@7.2.0:
-    resolution: {integrity: sha512-C/Naxf8H0pBx1PA4BdpT+c/5wdqI9ILMdwjSMILw7tVIh3JsxzZqdeTLmmdaoh5MYUEOyBnM9K3o0DzoZ/fe+w==}
+  vite@7.2.2:
+    resolution: {integrity: sha512-BxAKBWmIbrDgrokdGZH1IgkIk/5mMHDreLDmCJ0qpyJaAteP8NvMhkwr/ZCQNqNH97bw/dANTE9PDzqwJghfMQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -2194,7 +2194,7 @@ snapshots:
       '@typescript-eslint/types': 8.46.3
       eslint-visitor-keys: 4.2.1
 
-  '@vitejs/plugin-react@5.1.0(vite@7.2.0(@types/node@24.10.0)(yaml@2.8.1))':
+  '@vitejs/plugin-react@5.1.0(vite@7.2.2(@types/node@24.10.0)(yaml@2.8.1))':
     dependencies:
       '@babel/core': 7.28.5
       '@babel/plugin-transform-react-jsx-self': 7.27.1(@babel/core@7.28.5)
@@ -2202,7 +2202,7 @@ snapshots:
       '@rolldown/pluginutils': 1.0.0-beta.43
       '@types/babel__core': 7.20.5
       react-refresh: 0.18.0
-      vite: 7.2.0(@types/node@24.10.0)(yaml@2.8.1)
+      vite: 7.2.2(@types/node@24.10.0)(yaml@2.8.1)
     transitivePeerDependencies:
       - supports-color
 
@@ -2610,7 +2610,7 @@ snapshots:
     transitivePeerDependencies:
       - encoding
 
-  i18next@25.6.0(typescript@5.9.3):
+  i18next@25.6.1(typescript@5.9.3):
     dependencies:
       '@babel/runtime': 7.28.4
     optionalDependencies:
@@ -2883,11 +2883,11 @@ snapshots:
       react: 19.2.0
       scheduler: 0.27.0
 
-  react-i18next@16.2.4(i18next@25.6.0(typescript@5.9.3))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3):
+  react-i18next@16.2.4(i18next@25.6.1(typescript@5.9.3))(react-dom@19.2.0(react@19.2.0))(react@19.2.0)(typescript@5.9.3):
     dependencies:
       '@babel/runtime': 7.28.4
       html-parse-stringify: 3.0.1
-      i18next: 25.6.0(typescript@5.9.3)
+      i18next: 25.6.1(typescript@5.9.3)
       react: 19.2.0
       use-sync-external-store: 1.6.0(react@19.2.0)
     optionalDependencies:
@@ -3046,7 +3046,7 @@ snapshots:
 
   tslib@2.8.1: {}
 
-  ttr-calculator-typescript@1.0.16: {}
+  ttr-calculator-typescript@1.0.17: {}
 
   type-check@0.4.0:
     dependencies:
@@ -3095,7 +3095,7 @@ snapshots:
     dependencies:
       react: 19.2.0
 
-  vite@7.2.0(@types/node@24.10.0)(yaml@2.8.1):
+  vite@7.2.2(@types/node@24.10.0)(yaml@2.8.1):
     dependencies:
       esbuild: 0.25.12
       fdir: 6.5.0(picomatch@4.0.3)

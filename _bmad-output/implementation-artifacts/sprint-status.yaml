@@ -1,0 +1,75 @@
+# generated: 2026-03-15
+# last_updated: 2026-03-15
+# project: ttr-calculator
+# project_key: NOKEY
+# tracking_system: file-system
+# story_location: _bmad-output/implementation-artifacts/stories
+
+# STATUS DEFINITIONS:
+# ==================
+# Epic Status:
+#   - backlog: Epic not yet started
+#   - in-progress: Epic actively being worked on
+#   - done: All stories in epic completed
+#
+# Epic Status Transitions:
+#   - backlog → in-progress: Automatically when first story is created (via create-story)
+#   - in-progress → done: Manually when all stories reach 'done' status
+#
+# Story Status:
+#   - backlog: Story only exists in epic file
+#   - ready-for-dev: Story file created in stories folder
+#   - in-progress: Developer actively working on implementation
+#   - review: Ready for code review (via Dev's code-review workflow)
+#   - done: Story completed
+#
+# Retrospective Status:
+#   - optional: Can be completed but not required
+#   - done: Retrospective has been completed
+#
+# WORKFLOW NOTES:
+# ===============
+# - Epic transitions to 'in-progress' automatically when first story is created
+# - Stories can be worked in parallel if team capacity allows
+# - SM typically creates next story after previous one is 'done' to incorporate learnings
+# - Dev moves story to 'review', then runs code-review (fresh context, different LLM recommended)
+
+generated: 2026-03-15
+last_updated: 2026-03-15
+project: ttr-calculator
+project_key: NOKEY
+tracking_system: file-system
+story_location: "_bmad-output/implementation-artifacts/stories"
+
+development_status:
+  epic-1: done
+  1-1-typescript-configuration-and-project-verification: done
+  1-2-appstate-type-definitions-and-initial-state-factory: done
+  1-3-localstorage-adapter: done
+  1-4-i18n-module-and-translation-files: done
+  1-5-app-entry-point-and-html-shell: done
+  epic-1-retrospective: optional
+
+  epic-2: done
+  2-1-own-ttr-input-with-localstorage-persistence: done
+  2-2-opponent-list-state-mutations: done
+  2-3-opponent-list-rendering: done
+  2-4-add-and-remove-opponent-event-wiring: done
+  2-5-opponent-ttr-and-win-loss-input-wiring: done
+  2-6-data-entry-accessibility-verification: done
+  epic-2-retrospective: optional
+
+  epic-3: done
+  3-1-calculation-adapter: done
+  3-2-calculate-button-guard-and-state-mutations-for-results: done
+  3-3-calculation-event-wiring-and-inline-results-rendering: done
+  3-4-stale-indicator-on-input-change: done
+  3-5-in-place-recalculation: done
+  3-6-calculation-and-results-accessibility-verification: done
+  epic-3-retrospective: optional
+
+  epic-4: done
+  4-1-reset-state-mutation: done
+  4-2-reset-button-and-confirmation-dialog: done
+  4-3-reset-accessibility-verification: done
+  epic-4-retrospective: optional

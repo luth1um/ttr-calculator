@@ -1,0 +1,38 @@
+{
+  "app": {
+    "title": "TTR-Rechner"
+  },
+  "own-ttr": {
+    "label": "Eigener TTR"
+  },
+  "opponent": {
+    "label": "Gegner {{number}}",
+    "ttr-label": "TTR von Gegner {{number}}",
+    "won-label": "Ergebnis gegen Gegner {{number}}",
+    "won-option": "Sieg",
+    "lost-option": "Niederlage",
+    "delete-label": "Gegner {{number}} entfernen"
+  },
+  "button": {
+    "add-opponent": "+ Gegner hinzufügen",
+    "calculate": "Berechnen",
+    "reset": "Zurücksetzen",
+    "confirm": "Bestätigen",
+    "cancel": "Abbrechen"
+  },
+  "result": {
+    "new-ttr": "Neuer TTR",
+    "delta": "Delta",
+    "win-expectation": "Siegerwartung",
+    "expected-wins": "Erwartete Siege",
+    "stale-notice": "Ergebnisse möglicherweise veraltet — Eingaben wurden geändert."
+  },
+  "dialog": {
+    "reset-title": "Sitzung zurücksetzen",
+    "reset-message": "Alle Gegner löschen und neu beginnen? Dein eigener TTR bleibt erhalten.",
+    "stale-aria-live": "Ergebnisse sind veraltet — Eingaben wurden geändert."
+  },
+  "footer": {
+    "text": "TTR-Rechner"
+  }
+}

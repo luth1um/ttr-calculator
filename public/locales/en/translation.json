@@ -1,0 +1,38 @@
+{
+  "app": {
+    "title": "TTR Calculator"
+  },
+  "own-ttr": {
+    "label": "Your TTR"
+  },
+  "opponent": {
+    "label": "Opponent {{number}}",
+    "ttr-label": "Opponent {{number}} TTR",
+    "won-label": "Result for Opponent {{number}}",
+    "won-option": "Win",
+    "lost-option": "Loss",
+    "delete-label": "Remove Opponent {{number}}"
+  },
+  "button": {
+    "add-opponent": "+ Add Opponent",
+    "calculate": "Calculate",
+    "reset": "Reset",
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  },
+  "result": {
+    "new-ttr": "New TTR",
+    "delta": "Delta",
+    "win-expectation": "Win Expectation",
+    "expected-wins": "Expected Wins",
+    "stale-notice": "Results may be outdated — inputs have changed."
+  },
+  "dialog": {
+    "reset-title": "Reset Session",
+    "reset-message": "Clear all opponents and start fresh? Your own TTR will be kept.",
+    "stale-aria-live": "Results are outdated — inputs have changed."
+  },
+  "footer": {
+    "text": "TTR Calculator"
+  }
+}

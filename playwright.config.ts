@@ -55,6 +55,9 @@ export default defineConfig({
     },
   ],
 
+  /*  Single template for all assertions */
+  snapshotPathTemplate: "{testDir}/__screenshots__/{testFilePath}/{arg}{ext}",
+
   /* Run your local dev server before starting the tests */
   webServer: {
     command: "npm start",

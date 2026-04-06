@@ -159,4 +159,9 @@ export class AppPage {
   async clickCancelReset(): Promise<void> {
     await this.cancelResetButton.click();
   }
+
+  async scrollToBottom(): Promise<void> {
+    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+    await this.page.waitForTimeout(200); // wait for page to stabilize after scrolling
+  }
 }

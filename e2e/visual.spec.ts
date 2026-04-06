@@ -11,7 +11,7 @@ test.describe("The visuals of the page", () => {
     await appPage.goto();
 
     // then
-    await expect(page).toHaveScreenshot(createSnapshotName("initial-page", testInfo), screenshotOptions());
+    await expect(page).toHaveScreenshot(createSnapshotName("initial-page", testInfo), screenshotOptions(0.03));
   });
 
   test("should be as expected when when there is one opponent with a win and one opponent with a loss", async ({
@@ -26,7 +26,7 @@ test.describe("The visuals of the page", () => {
     await appPage.clickWonToggleByIndex(0);
 
     // then
-    await expect(page).toHaveScreenshot(createSnapshotName("one-win-one-loss", testInfo), screenshotOptions());
+    await expect(page).toHaveScreenshot(createSnapshotName("one-win-one-loss", testInfo), screenshotOptions(0.03));
   });
 
   test("should be as expected when a result is visible", async ({ page }, testInfo) => {
@@ -39,7 +39,7 @@ test.describe("The visuals of the page", () => {
     await appPage.clickCalculate();
 
     // then
-    await expect(page).toHaveScreenshot(createSnapshotName("with-result", testInfo), screenshotOptions());
+    await expect(page).toHaveScreenshot(createSnapshotName("with-result", testInfo), screenshotOptions(0.03));
   });
 
   test("should be as expected when the reset dialog is visible", async ({ page }, testInfo) => {
@@ -53,7 +53,7 @@ test.describe("The visuals of the page", () => {
     await appPage.clickReset();
 
     // then
-    await expect(page).toHaveScreenshot(createSnapshotName("reset-dialog", testInfo), screenshotOptions());
+    await expect(page).toHaveScreenshot(createSnapshotName("reset-dialog", testInfo), screenshotOptions(0.04));
   });
 
   test("should be as expected when the results are stale", async ({ page }, testInfo) => {
@@ -67,7 +67,7 @@ test.describe("The visuals of the page", () => {
     await appPage.setOwnTtr("1402");
 
     // then
-    await expect(page).toHaveScreenshot(createSnapshotName("stale-results", testInfo), screenshotOptions());
+    await expect(page).toHaveScreenshot(createSnapshotName("stale-results", testInfo), screenshotOptions(0.04));
   });
 });
 

@@ -12,6 +12,7 @@ test.describe("The TTR Calculator", () => {
 
     // when
     await appPage.goto();
+    await page.waitForTimeout(200); // wait for page to stabilize
     const rowCount = await appPage.getOpponentRowCount();
     const labelText = await appPage.getOpponentLabelTextByIndex(0);
     const ttrValue = await appPage.getOpponentTtrValueByIndex(0);

@@ -85,7 +85,7 @@ test.describe("The visuals of the page", () => {
  * // Returns: "initial-page-chromium.png"
  * createSnapshotName("initial-page", testInfo);
  */
-function createSnapshotName(baseName: string, testInfo: TestInfo) {
+function createSnapshotName(baseName: string, testInfo: TestInfo): string {
   const platformName = testInfo.project.name.split(" ").join("-");
   return [baseName, platformName].join("-") + ".png";
 }

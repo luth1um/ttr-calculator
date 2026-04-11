@@ -162,8 +162,8 @@ export class AppPage {
 
   async scrollToBottom(): Promise<void> {
     // wait for page to stabilize before and after scrolling
-    await this.page.waitForTimeout(200);
+    await this.page.waitForTimeout(300);
     await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await this.page.waitForTimeout(200);
+    await this.page.waitForTimeout(300);
   }
 }

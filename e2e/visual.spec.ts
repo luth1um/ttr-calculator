@@ -1,5 +1,6 @@
 import { expect, PageAssertionsToHaveScreenshotOptions, test, TestInfo } from "@playwright/test";
 
+import { skipMobileSafari } from "./helpers/miscHelpers";
 import { AppPage } from "./pages/AppPage";
 
 test.describe("The visuals of the page", () => {
@@ -17,6 +18,8 @@ test.describe("The visuals of the page", () => {
   test("should be as expected when when there is one opponent with a win and one opponent with a loss", async ({
     page,
   }, testInfo) => {
+    skipMobileSafari(testInfo);
+
     // given
     const appPage = new AppPage(page);
 

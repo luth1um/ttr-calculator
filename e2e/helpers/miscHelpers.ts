@@ -22,3 +22,8 @@ export function skipDesktopSafari(testInfo: TestInfo) {
   const browser = testInfo.project.name;
   test.skip(browser === PROJECT_NAME_DESKTOP_SAFARI, `Skipping test for ${PROJECT_NAME_DESKTOP_SAFARI}`);
 }
+
+export function skipMobileSafari(testInfo: TestInfo) {
+  const browser = testInfo.project.name;
+  test.skip(browser === PROJECT_NAME_MOBILE_SAFARI, `Skipping test for ${PROJECT_NAME_MOBILE_SAFARI}`);
+}

@@ -160,10 +160,11 @@ export class AppPage {
     await this.cancelResetButton.click();
   }
 
-  async scrollToBottom(): Promise<void> {
-    // wait for page to stabilize before and after scrolling
-    await this.page.waitForTimeout(300);
-    await this.page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-    await this.page.waitForTimeout(300);
+  async scrollToSummaryBlock(): Promise<void> {
+    await this.summaryBlock.scrollIntoViewIfNeeded();
+  }
+
+  async scrollToWonToggleByIndex(index: number): Promise<void> {
+    await this.getOpponentWonToggleByIndex(index).scrollIntoViewIfNeeded();
   }
 }

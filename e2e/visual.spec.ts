@@ -24,7 +24,7 @@ test.describe("The visuals of the page", () => {
     await appPage.goto();
     await appPage.addOpponentButton.click();
     await appPage.clickWonToggleByIndex(0);
-    await appPage.scrollToBottom();
+    await appPage.scrollToWonToggleByIndex(1);
 
     // then
     await expect(page).toHaveScreenshot(createSnapshotName("one-win-one-loss", testInfo), screenshotOptions(0.03));
@@ -38,7 +38,7 @@ test.describe("The visuals of the page", () => {
     await appPage.goto();
     await appPage.setOwnTtr("1400");
     await appPage.clickCalculate();
-    await appPage.scrollToBottom();
+    await appPage.scrollToSummaryBlock();
 
     // then
     await expect(page).toHaveScreenshot(createSnapshotName("with-result", testInfo), screenshotOptions(0.03));
@@ -67,7 +67,7 @@ test.describe("The visuals of the page", () => {
     await appPage.setOwnTtr("1400");
     await appPage.clickCalculate();
     await appPage.setOwnTtr("1402");
-    await appPage.scrollToBottom();
+    await appPage.scrollToSummaryBlock();
 
     // then
     await expect(page).toHaveScreenshot(createSnapshotName("stale-results", testInfo), screenshotOptions(0.03));

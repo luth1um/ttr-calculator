@@ -38,7 +38,7 @@ test.describe("The TTR Calculator", () => {
     expect(label3).toBe("Opponent 3");
   });
 
-  test("shows Calculate button disabled when ownTtr is empty on first load", async ({ page }, testInfo) => {
+  test("shows Calculate button enabled on first load when default TTR values are set", async ({ page }, testInfo) => {
     skipMobileBrowsers(testInfo);
 
     // given
@@ -49,7 +49,7 @@ test.describe("The TTR Calculator", () => {
     const isEnabled = await appPage.isCalculateButtonEnabled();
 
     // then
-    expect(isEnabled).toBe(false);
+    expect(isEnabled).toBe(true);
   });
 
   test("enables Calculate button when ownTtr is set and all opponents have valid TTR", async ({ page }, testInfo) => {

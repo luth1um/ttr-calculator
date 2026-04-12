@@ -61,6 +61,7 @@ export class AppPage {
 
   async typeOwnTtrSequentially(value: string): Promise<void> {
     await this.ownTtrInput.click();
+    await this.ownTtrInput.selectText();
     await this.ownTtrInput.pressSequentially(value);
   }
 

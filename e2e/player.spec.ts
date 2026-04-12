@@ -4,7 +4,9 @@ import { skipMobileBrowsers } from "./helpers/miscHelpers";
 import { AppPage } from "./pages/AppPage";
 
 test.describe("The TTR Calculator", () => {
-  test("shows labeled empty own TTR input when app is opened for the first time", async ({ page }, testInfo) => {
+  test("shows labeled own TTR input with default value 1000 when app is opened for the first time", async ({
+    page,
+  }, testInfo) => {
     skipMobileBrowsers(testInfo);
 
     // given
@@ -18,7 +20,7 @@ test.describe("The TTR Calculator", () => {
     await expect(appPage.ownTtrLabel).toBeVisible();
     await expect(appPage.ownTtrLabel).toHaveText("Player TTR");
     await expect(appPage.ownTtrInput).toBeVisible();
-    expect(ownTtrValue).toBe("");
+    expect(ownTtrValue).toBe("1000");
   });
 
   test("retains focus for multi-digit own TTR entry when the entry is typed character by character", async ({
@@ -38,7 +40,7 @@ test.describe("The TTR Calculator", () => {
     expect(ownTtrValue).toBe("1423");
   });
 
-  test("clears persisted own TTR when input is cleared before reload", async ({ page }, testInfo) => {
+  test("resets own TTR to default 1000 when input is cleared before reload", async ({ page }, testInfo) => {
     skipMobileBrowsers(testInfo);
 
     // given
@@ -54,7 +56,7 @@ test.describe("The TTR Calculator", () => {
     const ownTtrValue = await appPage.getOwnTtrValue();
 
     // then
-    expect(ownTtrValue).toBe("");
+    expect(ownTtrValue).toBe("1000");
   });
 
   test("shows all four player factor checkboxes unchecked on first visit", async ({ page }, testInfo) => {

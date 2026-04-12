@@ -28,7 +28,7 @@ export type AppState = {
 
 export function createInitialState(): AppState {
   return {
-    ownTtr: null,
+    ownTtr: 1000,
     opponents: [],
     playerFactors: {
       isYoungerThan21: false,

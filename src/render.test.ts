@@ -27,6 +27,7 @@ describe("render", () => {
   it("renders labeled own TTR input when ownTtr is null", () => {
     // given
     const state = createInitialState();
+    state.ownTtr = null;
 
     // when
     render(state);
@@ -40,6 +41,18 @@ describe("render", () => {
     expect(label?.textContent).toBe("Player TTR");
     expect(input).not.toBeNull();
     expect(input?.value).toBe("");
+  });
+
+  it("renders own TTR value of 1000 when using initial state", () => {
+    // given
+    const state = createInitialState();
+
+    // when
+    render(state);
+
+    // then
+    const input = document.getElementById("own-ttr") as HTMLInputElement | null;
+    expect(input?.value).toBe("1000");
   });
 
   it("renders own TTR value when ownTtr is present in state", () => {

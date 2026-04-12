@@ -22,12 +22,12 @@ describe("loadOwnTtr", () => {
     localStorage.clear();
   });
 
-  it("returns null when ownTtr is not present in localStorage", () => {
+  it("returns 1000 when ownTtr is not present in localStorage", () => {
     // when
     const result = loadOwnTtr();
 
     // then
-    expect(result).toBe(null);
+    expect(result).toBe(1000);
   });
 
   it("returns stored number when ownTtr contains a numeric string", () => {
@@ -41,7 +41,7 @@ describe("loadOwnTtr", () => {
     expect(result).toBe(1500);
   });
 
-  it("returns null when ownTtr contains a non-numeric string", () => {
+  it("returns 1000 when ownTtr contains a non-numeric string", () => {
     // given
     localStorage.setItem("ownTtr", "notanumber");
 
@@ -49,10 +49,10 @@ describe("loadOwnTtr", () => {
     const result = loadOwnTtr();
 
     // then
-    expect(result).toBe(null);
+    expect(result).toBe(1000);
   });
 
-  it("returns null when ownTtr contains an empty string", () => {
+  it("returns 1000 when ownTtr contains an empty string", () => {
     // given
     localStorage.setItem("ownTtr", "");
 
@@ -60,7 +60,7 @@ describe("loadOwnTtr", () => {
     const result = loadOwnTtr();
 
     // then
-    expect(result).toBe(null);
+    expect(result).toBe(1000);
   });
 
   it("returns zero when ownTtr contains string zero", () => {

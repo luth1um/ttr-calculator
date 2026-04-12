@@ -19,7 +19,7 @@ describe("createInitialState", () => {
     const state = createInitialState();
 
     // then
-    expect(state.ownTtr).toBe(null);
+    expect(state.ownTtr).toBe(1000);
     expect(state.opponents).toEqual([]);
     expect(state.playerFactors).toEqual({
       isYoungerThan21: false,

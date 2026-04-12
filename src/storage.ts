@@ -26,11 +26,11 @@ function isPlayerFactors(value: unknown): value is PlayerFactors {
   );
 }
 
-export function loadOwnTtr(): number | null {
+export function loadOwnTtr(): number {
   const val = localStorage.getItem("ownTtr");
-  if (val === null || val === "") return null;
+  if (val === null || val === "") return 1000;
   const num = Number(val);
-  return isNaN(num) ? null : num;
+  return isNaN(num) ? 1000 : num;
 }
 
 export function saveOwnTtr(value: number | null): void {

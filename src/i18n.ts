@@ -9,7 +9,7 @@ export async function init(): Promise<void> {
     .init({
       fallbackLng: "en",
       backend: {
-        loadPath: "/ttr-calculator/locales/{{lng}}/translation.json",
+        loadPath: `${import.meta.env.BASE_URL}locales/{{lng}}/translation.json`,
       },
     });
 }

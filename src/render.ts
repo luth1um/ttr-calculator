@@ -1,6 +1,75 @@
 import { t } from "./i18n";
 import type { AppState } from "./state";
 
+export function updateStaleState(state: AppState): void {
+  const summaryBlock = document.getElementById("summary-block");
+  const staleIndicator = document.getElementById("stale-indicator");
+
+  if (state.results === null) {
+    return;
+  }
+
+  if (state.isStale) {
+    summaryBlock?.classList.add("stale");
+    if (staleIndicator === null) {
+      const actionButtons = document.querySelector(".action-buttons");
+      if (actionButtons !== null) {
+        const p = document.createElement("p");
+        p.id = "stale-indicator";
+        p.textContent = t("stale.indicator");
+        actionButtons.after(p);
+      }
+    }
+    for (const el of document.querySelectorAll(".win-expectation")) {
+      el.classList.add("stale");
+    }
+  } else {
+    summaryBlock?.classList.remove("stale");
+    staleIndicator?.remove();
+    for (const el of document.querySelectorAll(".win-expectation")) {
+      el.classList.remove("stale");
+    }
+  }
+}
+
+export function updateCalculateButtonState(state: AppState): void {
+  const button = document.getElementById("calculate-button") as HTMLButtonElement | null;
+  if (button === null) {
+    return;
+  }
+  const isDisabled =
+    state.ownTtr === null || state.opponents.length === 0 || state.opponents.some((o) => o.ttr === null);
+  button.disabled = isDisabled;
+}
+
+export function updatePlayerFactorCheckboxes(state: AppState): void {
+  const mapping: Record<string, boolean> = {
+    "factor-younger-than-21": state.playerFactors.isYoungerThan21,
+    "factor-younger-than-16": state.playerFactors.isYoungerThan16,
+    "factor-less-than-30-games": state.playerFactors.lessThan30SingleGames,
+    "factor-returnee-less-than-15": state.playerFactors.lessThan15GamesOverallOrAfterYearBreak,
+  };
+  for (const [id, checked] of Object.entries(mapping)) {
+    const checkbox = document.getElementById(id) as HTMLInputElement | null;
+    if (checkbox !== null) {
+      checkbox.checked = checked;
+    }
+  }
+}
+
+export function updateOpponentWonButton(state: AppState, opponentId: string): void {
+  const opponent = state.opponents.find((o) => o.id === opponentId);
+  if (opponent === undefined) {
+    return;
+  }
+  const button = document.getElementById(`opponent-won-${opponentId}`) as HTMLButtonElement | null;
+  if (button === null) {
+    return;
+  }
+  button.textContent = opponent.won ? t("opponent.won") : t("opponent.lost");
+  button.dataset["won"] = opponent.won ? "true" : "false";
+}
+
 function saveFocus(): { id: string; selectionStart: number | null; selectionEnd: number | null } | null {
   const active = document.activeElement;
   if (active instanceof HTMLElement && active.id) {

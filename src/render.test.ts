@@ -1,8 +1,15 @@
 // @vitest-environment jsdom
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
-import { render } from "./render";
+import {
+  render,
+  updateStaleState,
+  updateCalculateButtonState,
+  updatePlayerFactorCheckboxes,
+  updateOpponentWonButton,
+} from "./render";
 import { createInitialState, addOpponent } from "./state";
+import type { CalculationResults } from "./state";
 
 vi.mock("./i18n", () => ({
   t: (key: string) => {
@@ -143,5 +150,281 @@ describe("render", () => {
     expect(document.activeElement).toBe(restoredInput);
     expect(restoredInput.selectionStart).toBe(2);
     expect(restoredInput.selectionEnd).toBe(2);
+  });
+});
+
+function makeResults(opponentId: string): CalculationResults {
+  return {
+    updatedRating: 1050,
+    ratingChange: 50,
+    expectedNumberWins: 0.5,
+    winExpectations: { [opponentId]: 0.5 },
+  };
+}
+
+describe("updateStaleState", () => {
+  beforeEach(() => {
+    document.body.innerHTML = '<main id="app"></main>';
+  });
+
+  it("adds stale class to summary block and inserts stale indicator when state becomes stale", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    state.results = makeResults(state.opponents[0].id);
+    state.isStale = false;
+    render(state);
+
+    // when
+    state.isStale = true;
+    updateStaleState(state);
+
+    // then
+    expect(document.getElementById("summary-block")?.classList.contains("stale")).toBe(true);
+    expect(document.getElementById("stale-indicator")).not.toBeNull();
+  });
+
+  it("removes stale class from summary block and removes stale indicator when state is no longer stale", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    state.results = makeResults(state.opponents[0].id);
+    state.isStale = true;
+    render(state);
+
+    // when
+    state.isStale = false;
+    updateStaleState(state);
+
+    // then
+    expect(document.getElementById("summary-block")?.classList.contains("stale")).toBe(false);
+    expect(document.getElementById("stale-indicator")).toBeNull();
+  });
+
+  it("does nothing when results are null", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    render(state);
+
+    // when
+    state.isStale = true;
+    updateStaleState(state);
+
+    // then
+    expect(document.getElementById("stale-indicator")).toBeNull();
+  });
+
+  it("does not insert a duplicate stale indicator when already stale", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    state.results = makeResults(state.opponents[0].id);
+    state.isStale = true;
+    render(state);
+
+    // when — call again while still stale
+    updateStaleState(state);
+
+    // then
+    expect(document.querySelectorAll("#stale-indicator").length).toBe(1);
+  });
+
+  it("adds stale class to win-expectation spans", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    state.results = makeResults(state.opponents[0].id);
+    state.isStale = false;
+    render(state);
+
+    // when
+    state.isStale = true;
+    updateStaleState(state);
+
+    // then
+    const winExpectations = document.querySelectorAll(".win-expectation");
+    expect(winExpectations.length).toBeGreaterThan(0);
+    for (const el of winExpectations) {
+      expect(el.classList.contains("stale")).toBe(true);
+    }
+  });
+
+  it("removes stale class from win-expectation spans when no longer stale", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    state.results = makeResults(state.opponents[0].id);
+    state.isStale = true;
+    render(state);
+
+    // when
+    state.isStale = false;
+    updateStaleState(state);
+
+    // then
+    for (const el of document.querySelectorAll(".win-expectation")) {
+      expect(el.classList.contains("stale")).toBe(false);
+    }
+  });
+});
+
+describe("updateCalculateButtonState", () => {
+  beforeEach(() => {
+    document.body.innerHTML = '<main id="app"></main>';
+  });
+
+  it("disables calculate button when ownTtr is null", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    render(state);
+
+    // when
+    state.ownTtr = null;
+    updateCalculateButtonState(state);
+
+    // then
+    const button = document.getElementById("calculate-button") as HTMLButtonElement;
+    expect(button.disabled).toBe(true);
+  });
+
+  it("enables calculate button when all TTR values are present", () => {
+    // given
+    const state = createInitialState();
+    state.ownTtr = null;
+    addOpponent(state);
+    render(state);
+
+    // when
+    state.ownTtr = 1000;
+    updateCalculateButtonState(state);
+
+    // then
+    const button = document.getElementById("calculate-button") as HTMLButtonElement;
+    expect(button.disabled).toBe(false);
+  });
+
+  it("disables calculate button when an opponent has null TTR", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    render(state);
+
+    // when
+    state.opponents[0].ttr = null;
+    updateCalculateButtonState(state);
+
+    // then
+    const button = document.getElementById("calculate-button") as HTMLButtonElement;
+    expect(button.disabled).toBe(true);
+  });
+});
+
+describe("updatePlayerFactorCheckboxes", () => {
+  beforeEach(() => {
+    document.body.innerHTML = '<main id="app"></main>';
+  });
+
+  it("checks the younger-than-21 checkbox when state has it true", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    render(state);
+
+    // when
+    state.playerFactors.isYoungerThan21 = true;
+    updatePlayerFactorCheckboxes(state);
+
+    // then
+    const checkbox = document.getElementById("factor-younger-than-21") as HTMLInputElement;
+    expect(checkbox.checked).toBe(true);
+  });
+
+  it("unchecks the younger-than-21 checkbox when state has it false", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    state.playerFactors.isYoungerThan21 = true;
+    render(state);
+
+    // when
+    state.playerFactors.isYoungerThan21 = false;
+    updatePlayerFactorCheckboxes(state);
+
+    // then
+    const checkbox = document.getElementById("factor-younger-than-21") as HTMLInputElement;
+    expect(checkbox.checked).toBe(false);
+  });
+
+  it("syncs all four checkboxes to their state values simultaneously", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    render(state);
+
+    // when
+    state.playerFactors.isYoungerThan21 = true;
+    state.playerFactors.isYoungerThan16 = true;
+    state.playerFactors.lessThan30SingleGames = false;
+    state.playerFactors.lessThan15GamesOverallOrAfterYearBreak = false;
+    updatePlayerFactorCheckboxes(state);
+
+    // then
+    expect((document.getElementById("factor-younger-than-21") as HTMLInputElement).checked).toBe(true);
+    expect((document.getElementById("factor-younger-than-16") as HTMLInputElement).checked).toBe(true);
+    expect((document.getElementById("factor-less-than-30-games") as HTMLInputElement).checked).toBe(false);
+    expect((document.getElementById("factor-returnee-less-than-15") as HTMLInputElement).checked).toBe(false);
+  });
+});
+
+describe("updateOpponentWonButton", () => {
+  beforeEach(() => {
+    document.body.innerHTML = '<main id="app"></main>';
+  });
+
+  it("updates button text and data-won to false when opponent lost", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    render(state);
+    const opponentId = state.opponents[0].id;
+
+    // when
+    state.opponents[0].won = false;
+    updateOpponentWonButton(state, opponentId);
+
+    // then
+    const button = document.getElementById(`opponent-won-${opponentId}`) as HTMLButtonElement;
+    expect(button.textContent).toBe("opponent.lost");
+    expect(button.dataset["won"]).toBe("false");
+  });
+
+  it("updates button text and data-won to true when opponent won", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    state.opponents[0].won = false;
+    render(state);
+    const opponentId = state.opponents[0].id;
+
+    // when
+    state.opponents[0].won = true;
+    updateOpponentWonButton(state, opponentId);
+
+    // then
+    const button = document.getElementById(`opponent-won-${opponentId}`) as HTMLButtonElement;
+    expect(button.textContent).toBe("opponent.won");
+    expect(button.dataset["won"]).toBe("true");
+  });
+
+  it("does nothing when opponentId is not in state", () => {
+    // given
+    const state = createInitialState();
+    addOpponent(state);
+    render(state);
+
+    // when / then — should not throw
+    expect(() => updateOpponentWonButton(state, "nonexistent-id")).not.toThrow();
   });
 });

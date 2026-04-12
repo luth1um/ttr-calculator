@@ -1,7 +1,13 @@
 import { calculateResults } from "./calculator";
 import { KEYBOARD_KEYS } from "./constants.ts";
 import { init } from "./i18n";
-import { render } from "./render";
+import {
+  render,
+  updateStaleState,
+  updateCalculateButtonState,
+  updatePlayerFactorCheckboxes,
+  updateOpponentWonButton,
+} from "./render";
 import {
   createInitialState,
   setOwnTtr,
@@ -76,14 +82,16 @@ async function main(): Promise<void> {
       const parsedValue = parseOwnTtrInput(target.value);
       setOwnTtr(state, parsedValue);
       saveOwnTtr(state.ownTtr);
-      render(state);
+      updateStaleState(state);
+      updateCalculateButtonState(state);
       return;
     }
     const opponentId = target.dataset["opponentId"];
     if (opponentId !== undefined && target.id.startsWith("opponent-ttr-")) {
       const parsedValue = parseOpponentTtrInput(target.value);
       setOpponentTtr(state, opponentId, parsedValue);
-      render(state);
+      updateStaleState(state);
+      updateCalculateButtonState(state);
     }
   });
 
@@ -98,7 +106,8 @@ async function main(): Promise<void> {
     }
     setPlayerFactor(state, factorKey, target.checked);
     savePlayerFactors(state.playerFactors);
-    render(state);
+    updatePlayerFactorCheckboxes(state);
+    updateStaleState(state);
   });
 
   app?.addEventListener("keydown", (event) => {
@@ -132,7 +141,8 @@ async function main(): Promise<void> {
       const opponentId = target.dataset["opponentId"];
       if (opponentId !== undefined) {
         toggleOpponentWon(state, opponentId);
-        render(state);
+        updateOpponentWonButton(state, opponentId);
+        updateStaleState(state);
       }
     }
     if (target.id === "calculate-button") {

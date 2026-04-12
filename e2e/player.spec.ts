@@ -16,7 +16,7 @@ test.describe("The TTR Calculator", () => {
 
     // then
     await expect(appPage.ownTtrLabel).toBeVisible();
-    await expect(appPage.ownTtrLabel).toHaveText("Your TTR");
+    await expect(appPage.ownTtrLabel).toHaveText("Player TTR");
     await expect(appPage.ownTtrInput).toBeVisible();
     expect(ownTtrValue).toBe("");
   });

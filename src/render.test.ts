@@ -8,7 +8,7 @@ vi.mock("./i18n", () => ({
   t: (key: string) => {
     const translations: Record<string, string> = {
       "app.title": "TTR Calculator",
-      "player.ownTtrLabel": "Your TTR",
+      "player.ownTtrLabel": "Player TTR",
       "playerFactors.youngerThan21Label": "Player is younger than 21",
       "playerFactors.youngerThan16Label": "Player is younger than 16",
       "playerFactors.lessThan30GamesLabel": "Player has fewer than 30 single games overall",
@@ -37,7 +37,7 @@ describe("render", () => {
     // then
     expect(document.title).toBe("TTR Calculator");
     expect(label).not.toBeNull();
-    expect(label?.textContent).toBe("Your TTR");
+    expect(label?.textContent).toBe("Player TTR");
     expect(input).not.toBeNull();
     expect(input?.value).toBe("");
   });

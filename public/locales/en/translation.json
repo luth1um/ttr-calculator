@@ -3,7 +3,7 @@
     "title": "TTR Calculator"
   },
   "player": {
-    "ownTtrLabel": "Your TTR"
+    "ownTtrLabel": "Player TTR"
   },
   "button": {
     "calculate": "Calculate",

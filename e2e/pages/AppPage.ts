@@ -27,7 +27,7 @@ export class AppPage {
     this.appRoot = page.locator("#app");
     this.ownTtrInput = page.locator("#own-ttr");
     this.ownTtrLabel = page.locator('label[for="own-ttr"]');
-    this.ownTtrInputByLabel = page.getByLabel("Your TTR");
+    this.ownTtrInputByLabel = page.getByLabel("Player TTR");
     this.factorYoungerThan21 = page.locator("#factor-younger-than-21");
     this.factorYoungerThan16 = page.locator("#factor-younger-than-16");
     this.factorLessThan30Games = page.locator("#factor-less-than-30-games");

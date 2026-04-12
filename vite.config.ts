@@ -7,6 +7,9 @@ export default defineConfig({
   build: {
     outDir: "dist/ttr-calculator",
   },
+  define: {
+    __BUILD_TIMESTAMP__: JSON.stringify(Date.now().toString()),
+  },
   server: {
     open: true,
   },

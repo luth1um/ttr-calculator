@@ -70,43 +70,22 @@ export function updateOpponentWonButton(state: AppState, opponentId: string): vo
   button.dataset["won"] = opponent.won ? "true" : "false";
 }
 
-function saveFocus(): { id: string; selectionStart: number | null; selectionEnd: number | null } | null {
+function saveFocus(): { id: string } | null {
   const active = document.activeElement;
   if (active instanceof HTMLElement && active.id) {
-    if (active instanceof HTMLInputElement && active.type === "text") {
-      return {
-        id: active.id,
-        selectionStart: active.selectionStart,
-        selectionEnd: active.selectionEnd,
-      };
-    }
-    return { id: active.id, selectionStart: null, selectionEnd: null };
+    return { id: active.id };
   }
   return null;
 }
 
-function restoreFocus(saved: { id: string; selectionStart: number | null; selectionEnd: number | null }): void {
+function restoreFocus(saved: { id: string }): void {
   const el = document.getElementById(saved.id);
   if (el === null) {
     return;
   }
+  el.focus();
   if (el instanceof HTMLInputElement && el.type === "text") {
-    el.focus();
-    if (saved.selectionStart !== null && saved.selectionEnd !== null) {
-      try {
-        el.setSelectionRange(saved.selectionStart, saved.selectionEnd);
-      } catch {
-        // setSelectionRange throws for input types that don't support it (e.g. number)
-      }
-    } else {
-      // For inputs that don't support selectionStart (e.g. type="number"),
-      // place cursor at end by re-assigning the value
-      const { value } = el;
-      el.value = "";
-      el.value = value;
-    }
-  } else {
-    el.focus();
+    el.select();
   }
 }
 

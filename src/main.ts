@@ -38,7 +38,7 @@ function parseOpponentTtrInput(value: string): number | null {
   if (Number.isNaN(num)) {
     return null;
   }
-  return Math.min(3000, Math.max(0, num));
+  return Math.max(0, num);
 }
 
 const CHECKBOX_TO_FACTOR: Record<string, keyof PlayerFactors> = {
@@ -66,6 +66,21 @@ async function main(): Promise<void> {
   render(state);
 
   const app = document.getElementById("app");
+  app?.addEventListener("focusin", (event) => {
+    const target = event.target;
+    if (
+      target instanceof HTMLInputElement &&
+      target.type === "text" &&
+      (target.id === "own-ttr" || target.id.startsWith("opponent-ttr-"))
+    ) {
+      requestAnimationFrame(() => {
+        if (document.activeElement === target) {
+          target.select();
+        }
+      });
+    }
+  });
+
   app?.addEventListener("input", (event) => {
     const target = event.target;
     if (!(target instanceof HTMLInputElement) || target.type !== "text") {

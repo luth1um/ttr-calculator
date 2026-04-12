@@ -132,7 +132,7 @@ describe("render", () => {
     expect(cb21.checked).toBe(true);
   });
 
-  it("preserves cursor position in opponent TTR input when it is re-rendered", () => {
+  it("selects entire opponent TTR input value when focus is restored after re-render", () => {
     // given
     const state = createInitialState();
     addOpponent(state);
@@ -140,7 +140,7 @@ describe("render", () => {
     const opponentId = state.opponents[0].id;
     const input = document.getElementById(`opponent-ttr-${opponentId}`) as HTMLInputElement;
     input.focus();
-    input.setSelectionRange(2, 2); // cursor after "10" in "1000"
+    input.setSelectionRange(2, 2); // cursor was after "10" in "1000"
 
     // when
     render(state);
@@ -148,8 +148,27 @@ describe("render", () => {
     // then
     const restoredInput = document.getElementById(`opponent-ttr-${opponentId}`) as HTMLInputElement;
     expect(document.activeElement).toBe(restoredInput);
-    expect(restoredInput.selectionStart).toBe(2);
-    expect(restoredInput.selectionEnd).toBe(2);
+    expect(restoredInput.selectionStart).toBe(0);
+    expect(restoredInput.selectionEnd).toBe(restoredInput.value.length);
+  });
+
+  it("selects entire own TTR input value when focus is restored after re-render", () => {
+    // given
+    const state = createInitialState();
+    state.ownTtr = 1500;
+    render(state);
+    const input = document.getElementById("own-ttr") as HTMLInputElement;
+    input.focus();
+    input.setSelectionRange(2, 2); // cursor was in the middle of "1500"
+
+    // when
+    render(state);
+
+    // then
+    const restoredInput = document.getElementById("own-ttr") as HTMLInputElement;
+    expect(document.activeElement).toBe(restoredInput);
+    expect(restoredInput.selectionStart).toBe(0);
+    expect(restoredInput.selectionEnd).toBe(restoredInput.value.length);
   });
 });
 

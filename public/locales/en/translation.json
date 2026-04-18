@@ -25,10 +25,10 @@
   },
   "playerFactors": {
     "legend": "Player Factors",
-    "youngerThan21Label": "Player is younger than 21",
-    "youngerThan16Label": "Player is younger than 16",
-    "lessThan30GamesLabel": "Player has fewer than 30 single games overall",
-    "returneeLessThan15Label": "Player paused for at least one year and has fewer than 15 single games since returning"
+    "youngerThan21Label": "Younger than 21",
+    "youngerThan16Label": "Younger than 16",
+    "lessThan30GamesLabel": "Fewer than 30 single games overall",
+    "returneeLessThan15Label": "Paused at least one year, fewer than 15 single games since returning"
   },
   "reset": {
     "dialogTitle": "Reset Session",

@@ -15,7 +15,7 @@ permissions: {}
 
 env:
   HUSKY: 0
-  NODE_VERSION: "24"
+  NODE_VERSION: "26"
   BUILD_ARTIFACT_NAME: "ttr-calculator-build-output"
   BUILD_ARTIFACT_FOLDER: "dist/ttr-calculator"
   PLAYWRIGHT_BLOB_REPORT_PREFIX: "playwright-blob-report"

@@ -1,4 +1,4 @@
-import { t } from "./i18n";
+import { formatNumber, t } from "./i18n";
 import type { AppState } from "./state";
 
 export function updateStaleState(state: AppState): void {
@@ -122,7 +122,7 @@ export function render(state: AppState): void {
           }
           ${
             state.results !== null && opponent.id in state.results.winExpectations
-              ? `<span class="win-expectation${state.isStale ? " stale" : ""}">${t("result.winExpectation")}: ${(state.results.winExpectations[opponent.id] * 100).toFixed(1)}%</span>`
+              ? `<span class="win-expectation${state.isStale ? " stale" : ""}">${t("result.winExpectation")}: ${formatNumber(state.results.winExpectations[opponent.id] * 100, { minimumFractionDigits: 1, maximumFractionDigits: 1 })}%</span>`
               : ""
           }
         </div>`,
@@ -180,7 +180,7 @@ export function render(state: AppState): void {
             ${t("result.delta")}: <strong class="result-value">${state.results.ratingChange >= 0 ? "+" : ""}${state.results.ratingChange}</strong>
           </div>
           <div class="result-item">
-            ${t("result.expectedWins")}: <strong class="result-value">${state.results.expectedNumberWins.toFixed(2)}</strong>
+            ${t("result.expectedWins")}: <strong class="result-value">${formatNumber(state.results.expectedNumberWins, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</strong>
           </div>
         </div>`
             : ""

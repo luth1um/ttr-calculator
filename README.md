@@ -17,6 +17,14 @@ The usual commands for Node projects can be used in this project.
 - `npm run e2e` to run E2E tests
 - `npm run build` to build the app for production
 
+# 📖 Adding New Languages
+
+When you to add new languages to the TTR Calculator, you need to update the following parts:
+
+- Add the translation file to `public/locales`.
+- Update `SUPPORTED_LANGUAGES` in `i18n.ts`.
+- Add a language-specific E2E test to `LANGUAGE_TEST_CASES` in `i18n.spec.ts`.
+
 # 🔗 Links
 
 - [TTR Calculator on Cloudflare Pages](https://ttr-calculator.pages.dev)

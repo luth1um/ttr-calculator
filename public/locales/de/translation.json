@@ -1,0 +1,42 @@
+{
+  "app": {
+    "title": "TTR-Rechner"
+  },
+  "player": {
+    "ownTtrLabel": "TTR Spieler:in"
+  },
+  "button": {
+    "calculate": "Berechnen",
+    "reset": "Zurücksetzen",
+    "addOpponent": "+ Gegner:in hinzufügen",
+    "removeOpponent": "Gegner:in {{number}} entfernen"
+  },
+  "opponent": {
+    "label": "Gegner:in {{number}}",
+    "ttrLabel": "TTR",
+    "won": "Sieg",
+    "lost": "Niederlage"
+  },
+  "result": {
+    "newTtr": "Neuer TTR",
+    "delta": "Delta",
+    "winExpectation": "Gewinnerwartung",
+    "expectedWins": "Erwartete Siege"
+  },
+  "playerFactors": {
+    "legend": "Spielerfaktoren",
+    "youngerThan21Label": "Jünger als 21",
+    "youngerThan16Label": "Jünger als 16",
+    "lessThan30GamesLabel": "Weniger als 30 Einzel insgesamt",
+    "returneeLessThan15Label": "Mindestens ein Jahr pausiert, weniger als 15 Einzel seit Rückkehr"
+  },
+  "reset": {
+    "dialogTitle": "Session zurücksetzen",
+    "confirmMessage": "Alle Gegner:innen entfernen und neu starten? Dein eigener TTR bleibt erhalten.",
+    "confirmButton": "Bestätigen",
+    "cancelButton": "Abbrechen"
+  },
+  "stale": {
+    "indicator": "Zum Aktualisieren neu berechnen."
+  }
+}

@@ -1,6 +1,7 @@
 // @vitest-environment jsdom
 import { describe, it, expect, beforeEach, vi } from "vitest";
 
+import { LANGUAGE_ENGLISH } from "./i18n";
 import {
   render,
   updateStaleState,
@@ -11,20 +12,26 @@ import {
 import { createInitialState, addOpponent } from "./state";
 import type { CalculationResults } from "./state";
 
-vi.mock("./i18n", () => ({
-  t: (key: string) => {
-    const translations: Record<string, string> = {
-      "app.title": "TTR Calculator",
-      "player.ownTtrLabel": "Player TTR",
-      "playerFactors.youngerThan21Label": "Player is younger than 21",
-      "playerFactors.youngerThan16Label": "Player is younger than 16",
-      "playerFactors.lessThan30GamesLabel": "Player has fewer than 30 single games overall",
-      "playerFactors.returneeLessThan15Label":
-        "Player paused for at least one year and has fewer than 15 single games since returning",
-    };
-    return translations[key] ?? key;
-  },
-}));
+vi.mock("./i18n", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("./i18n")>();
+  return {
+    ...actual,
+    t: (key: string) => {
+      const translations: Record<string, string> = {
+        "app.title": "TTR Calculator",
+        "player.ownTtrLabel": "Player TTR",
+        "playerFactors.youngerThan21Label": "Player is younger than 21",
+        "playerFactors.youngerThan16Label": "Player is younger than 16",
+        "playerFactors.lessThan30GamesLabel": "Player has fewer than 30 single games overall",
+        "playerFactors.returneeLessThan15Label":
+          "Player paused for at least one year and has fewer than 15 single games since returning",
+      };
+      return translations[key] ?? key;
+    },
+    formatNumber: (value: number, options?: Intl.NumberFormatOptions) =>
+      new Intl.NumberFormat(LANGUAGE_ENGLISH, options).format(value),
+  };
+});
 
 describe("render", () => {
   beforeEach(() => {

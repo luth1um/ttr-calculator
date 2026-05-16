@@ -1,6 +1,7 @@
 import type { Page, Locator } from "@playwright/test";
 
 import { TEST_BASE_URL } from "../../playwright.config";
+import { FALLBACK_LANGUAGE } from "../../src/i18n";
 
 export class AppPage {
   readonly page: Page;
@@ -21,6 +22,7 @@ export class AppPage {
   readonly confirmResetButton: Locator;
   readonly cancelResetButton: Locator;
   readonly resetDialogMessage: Locator;
+  readonly playerFactorsLegend: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -41,14 +43,37 @@ export class AppPage {
     this.confirmResetButton = page.locator("#confirm-reset");
     this.cancelResetButton = page.locator("#cancel-reset");
     this.resetDialogMessage = page.locator("#reset-dialog-message");
+    this.playerFactorsLegend = page.locator("fieldset > legend");
   }
 
   async goto(): Promise<void> {
-    await this.page.goto(TEST_BASE_URL);
+    await this.gotoWithLanguage(FALLBACK_LANGUAGE);
   }
 
   async reload(): Promise<void> {
+    await this.reloadWithLanguage(FALLBACK_LANGUAGE);
+  }
+
+  async gotoWithLanguage(language: string): Promise<void> {
+    await this.setLanguage(language);
+    await this.page.goto(TEST_BASE_URL);
+  }
+
+  async reloadWithLanguage(language: string): Promise<void> {
+    await this.setLanguage(language);
     await this.page.reload();
+  }
+
+  /**
+   * Must be called BEFORE goto() / reload() so the init script is registered prior to the page loading.
+   * @param language any BCP 47 language code, e.g. "en", "de", "en-GB"
+   */
+  async setLanguage(language: string): Promise<void> {
+    await this.page.addInitScript((lang: string) => {
+      localStorage.setItem("i18nextLng", lang);
+      Object.defineProperty(navigator, "language", { value: lang, configurable: true });
+      Object.defineProperty(navigator, "languages", { value: [lang], configurable: true });
+    }, language);
   }
 
   async setOwnTtr(value: string): Promise<void> {

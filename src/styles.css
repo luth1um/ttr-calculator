@@ -396,9 +396,11 @@ button:disabled {
   margin-top: var(--space-sm);
 }
 
-#add-opponent:hover {
-  background-color: var(--color-primary-light);
-  border-style: solid;
+@media (hover: hover) {
+  #add-opponent:hover {
+    background-color: var(--color-primary-light);
+    border-style: solid;
+  }
 }
 
 #add-opponent:active {

@@ -4,15 +4,15 @@ import Backend from "i18next-http-backend";
 
 declare const __BUILD_TIMESTAMP__: string;
 
+export const LANGUAGE_DUTCH = "nl";
 export const LANGUAGE_ENGLISH = "en";
 export const LANGUAGE_ENGLISH_GB = LANGUAGE_ENGLISH + "-GB";
 export const LANGUAGE_FRENCH = "fr";
 export const LANGUAGE_FRENCH_FR = LANGUAGE_FRENCH + "-FR";
 export const LANGUAGE_GERMAN = "de";
-export const LANGUAGE_GERMAN_DE = LANGUAGE_GERMAN + "-DE";
 
 export const FALLBACK_LANGUAGE = LANGUAGE_ENGLISH;
-export const SUPPORTED_LANGUAGES: readonly string[] = [LANGUAGE_ENGLISH, LANGUAGE_GERMAN];
+export const SUPPORTED_LANGUAGES: readonly string[] = [LANGUAGE_DUTCH, LANGUAGE_ENGLISH, LANGUAGE_GERMAN];
 
 export async function init(): Promise<void> {
   await i18next

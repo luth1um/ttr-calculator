@@ -1,10 +1,16 @@
 import { test, expect } from "@playwright/test";
 
-import { LANGUAGE_ENGLISH, LANGUAGE_FRENCH, LANGUAGE_GERMAN } from "../src/i18n";
+import { LANGUAGE_DUTCH, LANGUAGE_ENGLISH, LANGUAGE_FRENCH, LANGUAGE_GERMAN } from "../src/i18n";
 import { skipMobileBrowsers } from "./helpers/miscHelpers";
 import { AppPage } from "./pages/AppPage";
 
 const LANGUAGE_TEST_CASES = [
+  {
+    language: LANGUAGE_DUTCH,
+    expectedTitle: "TTR Rekenmachine",
+    expectedOwnTtrLabel: "Speler TTR",
+    expectedCalculateButton: "Berekenen",
+  },
   {
     language: LANGUAGE_ENGLISH,
     expectedTitle: "TTR Calculator",

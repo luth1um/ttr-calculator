@@ -1,0 +1,42 @@
+{
+  "app": {
+    "title": "TTR Rekenmachine"
+  },
+  "player": {
+    "ownTtrLabel": "Speler TTR"
+  },
+  "button": {
+    "calculate": "Berekenen",
+    "reset": "Terugzetten",
+    "addOpponent": "+ Nieuwe tegenstander",
+    "removeOpponent": "Tegenstander {{number}} verwijderen"
+  },
+  "opponent": {
+    "label": "Tegenstander {{number}}",
+    "ttrLabel": "TTR",
+    "won": "Gewonnen",
+    "lost": "Verloren"
+  },
+  "result": {
+    "newTtr": "Nieuwe TTR",
+    "delta": "Delta",
+    "winExpectation": "Verwachte kans op winst",
+    "expectedWins": "Verwacht aantal overwinningen"
+  },
+  "playerFactors": {
+    "legend": "Spelerfactoren",
+    "youngerThan21Label": "Jonger dan 21",
+    "youngerThan16Label": "Jonger dan 16",
+    "lessThan30GamesLabel": "Minder dan 30 enkelspelwedstrijden in totaal",
+    "returneeLessThan15Label": "Minstens één jaar gestopt en minder dan 15 wedstrijden gespeeld sinds terugkeer"
+  },
+  "reset": {
+    "dialogTitle": "Terugzetten sessie",
+    "confirmMessage": "Alle tegenstanders verwijderen en opnieuw beginnen? Je eigen TTR blijft behouden.",
+    "confirmButton": "Bevestigen",
+    "cancelButton": "Annuleren"
+  },
+  "stale": {
+    "indicator": "Resultaten zijn verouderd. Bereken opnieuw om bij te werken."
+  }
+}

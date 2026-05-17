@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "vite",
-    "clean": "node -e \"['dist', 'playwright-report', 'test-results'].forEach(p => fs.rmSync(p, { recursive: true, force: true }))\"",
+    "clean": "node -e \"['dist', 'playwright-report', 'test-results', 'shard-selection.txt'].forEach(p => fs.rmSync(p, { recursive: true, force: true }))\"",
     "format": "oxfmt",
     "format:check": "oxfmt --check",
     "lint": "oxlint --fix --deny-warnings",

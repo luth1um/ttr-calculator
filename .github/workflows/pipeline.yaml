@@ -123,8 +123,20 @@ jobs:
       - name: Install browsers and dependencies for Playwright
         run: npx playwright install --with-deps
 
+      - name: Compute round-robin shard selection
+        env:
+          SHARD_INDEX: ${{ matrix.shardIndex }}
+          SHARD_TOTAL: ${{ matrix.shardTotal }}
+        run: node scripts/shard-tests.mjs
+
       - name: Run E2E tests
-        run: npx playwright test --shard=${{ matrix.shardIndex }}/${{ matrix.shardTotal }}
+        run: |
+          if [ -s shard-selection.txt ]; then
+            xargs < shard-selection.txt npx playwright test --
+          else
+            echo "Error: no tests assigned to shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }}. This should not happen."
+            exit 1
+          fi
 
       - name: Upload blob report
         if: ${{ !cancelled() }}

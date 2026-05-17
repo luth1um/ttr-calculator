@@ -148,7 +148,7 @@ h1 {
    -------------------------------------------------------------------------- */
 
 .own-ttr-section,
-fieldset,
+.player-factors,
 #opponent-list,
 #summary-block {
   background: var(--color-surface);
@@ -216,14 +216,14 @@ input[type="text"]::placeholder {
    8. Player Factors (Fieldset & Checkboxes)
    -------------------------------------------------------------------------- */
 
-fieldset {
+.player-factors {
   display: flex;
   flex-direction: column;
   gap: var(--space-md);
   border: 1px solid var(--color-border);
 }
 
-fieldset legend {
+.group-legend {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
   color: var(--color-text-secondary);
@@ -233,7 +233,7 @@ fieldset legend {
   margin-bottom: var(--space-sm);
 }
 
-fieldset > div {
+.player-factors > div {
   display: flex;
   align-items: center;
   gap: var(--space-md);
@@ -241,7 +241,7 @@ fieldset > div {
   min-height: var(--min-touch-target);
 }
 
-fieldset input[type="checkbox"] {
+.player-factors input[type="checkbox"] {
   appearance: none;
   -webkit-appearance: none;
   width: var(--min-touch-target);
@@ -258,7 +258,7 @@ fieldset input[type="checkbox"] {
   justify-content: center;
 }
 
-fieldset input[type="checkbox"]::before {
+.player-factors input[type="checkbox"]::before {
   content: "";
   width: 20px;
   height: 20px;
@@ -270,16 +270,16 @@ fieldset input[type="checkbox"]::before {
     border-color var(--transition-fast);
 }
 
-fieldset input[type="checkbox"]:hover::before {
+.player-factors input[type="checkbox"]:hover::before {
   border-color: var(--color-primary);
 }
 
-fieldset input[type="checkbox"]:checked::before {
+.player-factors input[type="checkbox"]:checked::before {
   background-color: var(--color-primary);
   border-color: var(--color-primary);
 }
 
-fieldset input[type="checkbox"]:checked::after {
+.player-factors input[type="checkbox"]:checked::after {
   content: "";
   position: absolute;
   left: 50%;
@@ -291,12 +291,12 @@ fieldset input[type="checkbox"]:checked::after {
   transform: translate(-50%, -58%) rotate(45deg);
 }
 
-fieldset input[type="checkbox"]:focus-visible {
+.player-factors input[type="checkbox"]:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }
 
-fieldset label {
+.player-factors label {
   font-size: var(--font-size-sm);
   color: var(--color-text);
   cursor: pointer;
@@ -645,7 +645,7 @@ button[data-won="false"]:hover {
     border: 1px solid ButtonText;
   }
 
-  fieldset input[type="checkbox"] {
+  .player-factors input[type="checkbox"] {
     appearance: auto;
     -webkit-appearance: auto;
   }
@@ -673,7 +673,7 @@ button[data-won="false"]:hover {
   }
 
   .own-ttr-section,
-  fieldset,
+  .player-factors,
   #opponent-list,
   #summary-block {
     box-shadow: none;

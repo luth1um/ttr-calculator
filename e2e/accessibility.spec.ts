@@ -43,7 +43,7 @@ test("The player factor checkbox controls meet 44x44px touch target minimum", as
   await appPage.goto();
 
   // when
-  const checkboxes = page.locator('fieldset input[type="checkbox"]');
+  const checkboxes = page.locator('.player-factors input[type="checkbox"]');
   const checkboxCount = await checkboxes.count();
 
   // then

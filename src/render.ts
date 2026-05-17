@@ -142,8 +142,8 @@ export function render(state: AppState): void {
             value="${state.ownTtr === null ? "" : String(state.ownTtr)}"
           />
         </div>
-        <fieldset>
-          <legend>${t("playerFactors.legend")}</legend>
+        <div class="player-factors" role="group" aria-labelledby="player-factors-legend">
+          <div id="player-factors-legend" class="group-legend">${t("playerFactors.legend")}</div>
           <div>
             <input type="checkbox" id="factor-younger-than-21"${state.playerFactors.isYoungerThan21 ? " checked" : ""} />
             <label for="factor-younger-than-21">${t("playerFactors.youngerThan21Label")}</label>
@@ -160,7 +160,7 @@ export function render(state: AppState): void {
             <input type="checkbox" id="factor-returnee-less-than-15"${state.playerFactors.lessThan15GamesOverallOrAfterYearBreak ? " checked" : ""} />
             <label for="factor-returnee-less-than-15">${t("playerFactors.returneeLessThan15Label")}</label>
           </div>
-        </fieldset>
+        </div>
         <div id="opponent-list">
           ${opponentRowsHtml}
           <button id="add-opponent">${t("button.addOpponent")}</button>

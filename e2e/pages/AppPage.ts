@@ -43,7 +43,7 @@ export class AppPage {
     this.confirmResetButton = page.locator("#confirm-reset");
     this.cancelResetButton = page.locator("#cancel-reset");
     this.resetDialogMessage = page.locator("#reset-dialog-message");
-    this.playerFactorsLegend = page.locator("fieldset > legend");
+    this.playerFactorsLegend = page.locator(".player-factors > .group-legend");
   }
 
   async goto(): Promise<void> {

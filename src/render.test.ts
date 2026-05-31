@@ -19,6 +19,7 @@ vi.mock("./i18n", async (importOriginal) => {
     t: (key: string) => {
       const translations: Record<string, string> = {
         "app.title": "TTR Calculator",
+        "footer.sourceCodeLink": "View source code on GitHub",
         "player.ownTtrLabel": "Player TTR",
         "playerFactors.youngerThan21Label": "Player is younger than 21",
         "playerFactors.youngerThan16Label": "Player is younger than 16",
@@ -55,6 +56,22 @@ describe("render", () => {
     expect(label?.textContent).toBe("Player TTR");
     expect(input).not.toBeNull();
     expect(input?.value).toBe("");
+  });
+
+  it("renders a footer link to the GitHub source code when the site is opened", () => {
+    // given
+    const state = createInitialState();
+
+    // when
+    render(state);
+
+    // then
+    const link = document.querySelector<HTMLAnchorElement>(".app-footer a");
+    expect(link).not.toBeNull();
+    expect(link?.textContent).toBe("View source code on GitHub");
+    expect(link?.href).toBe("https://github.com/luth1um/ttr-calculator");
+    expect(link?.target).toBe("_blank");
+    expect(link?.rel).toBe("noopener noreferrer");
   });
 
   it("renders own TTR value of 1000 when using initial state", () => {

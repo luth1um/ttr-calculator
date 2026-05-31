@@ -194,6 +194,9 @@ export function render(state: AppState): void {
           <button id="confirm-reset">${t("reset.confirmButton")}</button>
         </div>
       </dialog>
+      <footer class="app-footer">
+        <a href="https://github.com/luth1um/ttr-calculator" target="_blank" rel="noopener noreferrer">${t("footer.sourceCodeLink")}</a>
+      </footer>
     `;
     if (focusState !== null) {
       restoreFocus(focusState);

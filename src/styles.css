@@ -129,6 +129,29 @@ body {
   gap: var(--space-xl);
 }
 
+.app-footer {
+  margin-top: var(--space-xl);
+  text-align: center;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.app-footer a {
+  color: var(--color-primary-active);
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
+
+.app-footer a:hover {
+  color: var(--color-primary-hover);
+}
+
+.app-footer a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 3px;
+  border-radius: var(--radius-sm);
+}
+
 /* --------------------------------------------------------------------------
    4. Typography
    -------------------------------------------------------------------------- */
@@ -387,8 +410,8 @@ button:disabled {
 /* Add Opponent button */
 #add-opponent {
   background-color: transparent;
-  color: var(--color-primary);
-  border: 1.5px dashed var(--color-primary);
+  color: var(--color-primary-active);
+  border: 1.5px dashed var(--color-primary-active);
   border-radius: var(--radius-md);
   padding: var(--space-md) var(--space-lg);
   width: 100%;

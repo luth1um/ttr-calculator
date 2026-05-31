@@ -2,6 +2,9 @@
   "app": {
     "title": "TTR-Rechner"
   },
+  "footer": {
+    "sourceCodeLink": "Quellcode auf GitHub ansehen"
+  },
   "player": {
     "ownTtrLabel": "TTR Spieler:in"
   },

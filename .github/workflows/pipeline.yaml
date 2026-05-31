@@ -95,9 +95,38 @@ jobs:
       - name: Run unit tests
         run: npm run test
 
+  # Extract Playwright version from package.json for the E2E container image
+  playwright-version:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    outputs:
+      playwright-version: ${{ steps.extract-playwright-version.outputs.version }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd #v6.0.2
+
+      - name: Extract Playwright version
+        id: extract-playwright-version
+        run: |
+          version="$(jq -r '.devDependencies["@playwright/test"] // empty' package.json)"
+
+          if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+            echo "@playwright/test must be pinned to an exact major.minor.patch version in devDependencies." >&2
+            exit 1
+          fi
+
+          echo "Extracted Playwright version: $version"
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
   # Run end-to-end tests with Playwright
   e2e:
+    needs:
+      - playwright-version
     runs-on: ubuntu-latest
+    container:
+      image: 'mcr.microsoft.com/playwright:v${{ needs.playwright-version.outputs.playwright-version }}'
+    env:
+      HOME: '/root' # needed for executing Playwright tests with Firefox
     strategy:
       fail-fast: false
       matrix:
@@ -119,9 +148,6 @@ jobs:
 
       - name: Clean-up of the test results
         run: npm run clean
-
-      - name: Install browsers and dependencies for Playwright
-        run: npx playwright install --with-deps
 
       - name: Compute round-robin shard selection
         env:

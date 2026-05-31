@@ -2,6 +2,9 @@
   "app": {
     "title": "TTR Calculator"
   },
+  "footer": {
+    "sourceCodeLink": "View source code on GitHub"
+  },
   "player": {
     "ownTtrLabel": "Player TTR"
   },

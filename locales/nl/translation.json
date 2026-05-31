@@ -2,6 +2,9 @@
   "app": {
     "title": "TTR Rekenmachine"
   },
+  "footer": {
+    "sourceCodeLink": "Broncode op GitHub bekijken"
+  },
   "player": {
     "ownTtrLabel": "Speler TTR"
   },

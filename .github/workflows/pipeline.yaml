@@ -124,9 +124,9 @@ jobs:
       - playwright-version
     runs-on: ubuntu-latest
     container:
-      image: 'mcr.microsoft.com/playwright:v${{ needs.playwright-version.outputs.playwright-version }}'
+      image: "mcr.microsoft.com/playwright:v${{ needs.playwright-version.outputs.playwright-version }}"
     env:
-      HOME: '/root' # needed for executing Playwright tests with Firefox
+      HOME: "/root" # needed for executing Playwright tests with Firefox
     strategy:
       fail-fast: false
       matrix:

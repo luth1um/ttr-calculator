@@ -8,7 +8,7 @@
  * evenly across shards.
  *
  * Usage:
- *   SHARD_INDEX=<1-based> SHARD_TOTAL=<n> node .github/scripts/shard-tests.mjs
+ *   SHARD_INDEX=<1-based> SHARD_TOTAL=<n> node scripts/shard-tests.mjs
  *
  * Output:
  *   Writes a newline-separated list of "file:line" selectors for this shard's

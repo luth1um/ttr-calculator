@@ -153,7 +153,7 @@ jobs:
         env:
           SHARD_INDEX: ${{ matrix.shardIndex }}
           SHARD_TOTAL: ${{ matrix.shardTotal }}
-        run: node scripts/shard-tests.mjs
+        run: node .github/scripts/shard-tests.mjs
 
       - name: Run E2E tests
         run: |

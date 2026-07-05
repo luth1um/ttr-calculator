@@ -158,7 +158,7 @@ jobs:
       - name: Run E2E tests
         run: |
           if [ -s shard-selection.txt ]; then
-            xargs < shard-selection.txt npx playwright test --
+            xargs < shard-selection.txt npx playwright test
           else
             echo "Error: no tests assigned to shard ${{ matrix.shardIndex }}/${{ matrix.shardTotal }}. This should not happen."
             exit 1

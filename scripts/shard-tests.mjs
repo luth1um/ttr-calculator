@@ -16,7 +16,7 @@
  *   file is written as empty.
  *
  * The caller should then run:
- *   xargs < shard-selection.txt npx playwright test --
+ *   xargs < shard-selection.txt npx playwright test
  */
 
 import { execSync } from "node:child_process";

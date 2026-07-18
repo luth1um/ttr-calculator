@@ -2,8 +2,7 @@ import { createHash } from "crypto";
 import { readdirSync, readFileSync, statSync } from "fs";
 import { join } from "path";
 
-/// <reference types="vitest/config" />
-import { defineConfig } from "vite";
+import { defineConfig } from "vitest/config";
 
 // https://vitejs.dev/config/
 export default defineConfig({

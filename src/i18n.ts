@@ -2,7 +2,7 @@ import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
 
-declare const __BUILD_TIMESTAMP__: string;
+declare const __LOCALES_HASH__: string;
 
 export const LANGUAGE_DUTCH = "nl";
 export const LANGUAGE_ENGLISH = "en";
@@ -23,7 +23,7 @@ export async function init(): Promise<void> {
       load: "languageOnly",
       backend: {
         loadPath: `${import.meta.env.BASE_URL}locales/{{lng}}/translation.json`,
-        queryStringParams: { v: __BUILD_TIMESTAMP__ },
+        queryStringParams: { v: __LOCALES_HASH__ },
       },
     });
   if (typeof document !== "undefined") {

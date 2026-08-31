@@ -1,6 +1,7 @@
 import { test, TestInfo } from "@playwright/test";
 
 import {
+  PROJECT_NAME_DESKTOP_CHROME,
   PROJECT_NAME_DESKTOP_SAFARI,
   PROJECT_NAME_FIREFOX,
   PROJECT_NAME_MOBILE_CHROME,
@@ -22,6 +23,11 @@ export function skipMobileBrowsers(testInfo: TestInfo) {
 export function skipDesktopSafari(testInfo: TestInfo) {
   const browser = testInfo.project.name;
   test.skip(browser === PROJECT_NAME_DESKTOP_SAFARI, `Skipping test for ${PROJECT_NAME_DESKTOP_SAFARI}`);
+}
+
+export function skipAllExceptDesktopChrome(testInfo: TestInfo) {
+  const browser = testInfo.project.name;
+  test.skip(browser !== PROJECT_NAME_DESKTOP_CHROME, `Skipping test for ${browser}`);
 }
 
 export function skipMobileSafari(testInfo: TestInfo) {

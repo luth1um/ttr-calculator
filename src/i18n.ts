@@ -13,6 +13,9 @@ export const LANGUAGE_GERMAN = "de";
 
 export const FALLBACK_LANGUAGE = LANGUAGE_ENGLISH;
 export const SUPPORTED_LANGUAGES: readonly string[] = [LANGUAGE_DUTCH, LANGUAGE_ENGLISH, LANGUAGE_GERMAN];
+export const LANGUAGE_FILE_PATHS: readonly string[] = SUPPORTED_LANGUAGES.map(
+  (code) => `locales/${code}/translation.json`,
+);
 
 export async function init(): Promise<void> {
   await i18next

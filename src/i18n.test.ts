@@ -8,6 +8,7 @@ import {
   formatNumber,
   LANGUAGE_FRENCH_FR,
   LANGUAGE_FRENCH,
+  LANGUAGE_FILE_PATHS,
 } from "./i18n";
 
 function stubNavigatorLanguage(language: string | undefined): void {
@@ -101,7 +102,17 @@ describe("formatNumber", () => {
 
 describe("SUPPORTED_LANGUAGES", () => {
   it("includes the fallback language", () => {
-    // then
     expect(SUPPORTED_LANGUAGES).toContain(FALLBACK_LANGUAGE);
+  });
+
+  it("has the same length as LANGUAGE_FILE_PATHS", () => {
+    expect(SUPPORTED_LANGUAGES).toHaveLength(LANGUAGE_FILE_PATHS.length);
+  });
+
+  it("contains the same languages as LANGUAGE_FILE_PATHS", () => {
+    SUPPORTED_LANGUAGES.forEach((language) => {
+      const containsLang = LANGUAGE_FILE_PATHS.some((path) => path.split("/")[1].includes(language));
+      expect(containsLang, `should contain file for ${language}`).toBe(true);
+    });
   });
 });

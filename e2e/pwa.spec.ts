@@ -1,5 +1,6 @@
 import { test, expect } from "@playwright/test";
 
+import { LANGUAGE_FILE_PATHS } from "../src/i18n";
 import { skipBrowsersWithoutOfflineEmulation, skipBrowsersWithoutOfflineNavigation } from "./helpers/miscHelpers";
 import { AppPage } from "./pages/AppPage";
 
@@ -36,9 +37,7 @@ test.describe("The PWA capabilities", () => {
           "pwa-512x512.png",
           "pwa-maskable-512x512.png",
           "apple-touch-icon-180x180.png",
-          "locales/de/translation.json",
-          "locales/en/translation.json",
-          "locales/nl/translation.json",
+          ...LANGUAGE_FILE_PATHS,
         ]),
       );
     const precachedPaths = await appPage.getPrecachedPaths();
@@ -96,12 +95,12 @@ test.describe("The PWA capabilities", () => {
     const appPage = new AppPage(page);
     await appPage.gotoProductionBuild();
     await appPage.waitForServiceWorkerActivation();
-    await expect.poll(() => appPage.getPrecachedPaths()).toContain("locales/de/translation.json");
+    await expect.poll(() => appPage.getPrecachedPaths()).toContain(LANGUAGE_FILE_PATHS[0]);
     await expect.poll(() => appPage.isControlledByServiceWorker()).toBe(true);
 
     // when
     await appPage.setOffline(true);
-    const status = await appPage.fetchStatus("locales/de/translation.json?v=cache-buster");
+    const status = await appPage.fetchStatus(`${LANGUAGE_FILE_PATHS[0]}?v=cache-buster`);
 
     // then
     expect(status).toBe(200);

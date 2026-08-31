@@ -2,6 +2,7 @@ import { defineConfig, devices } from "@playwright/test";
 
 export const PROJECT_NAME_DESKTOP_SAFARI = "webkit";
 export const PROJECT_NAME_FIREFOX = "firefox";
+export const PROJECT_NAME_DESKTOP_CHROME = "chromium";
 export const PROJECT_NAME_MOBILE_CHROME = "Mobile Chrome";
 export const PROJECT_NAME_MOBILE_SAFARI = "Mobile Safari";
 
@@ -34,7 +35,7 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
-      name: "chromium",
+      name: PROJECT_NAME_DESKTOP_CHROME,
       use: { ...devices["Desktop Chrome"] },
     },
 

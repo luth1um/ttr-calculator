@@ -16,7 +16,7 @@
     "e2e-ui": "playwright test --ui",
     "e2e-update-snapshots": "playwright test --update-snapshots",
     "preview": "vite preview",
-    "all-checks": "npm run clean && npm run format && npm run lint && npm run build && npm run test && npm run e2e",
+    "all-checks": "npm run clean && npm run format && npm run lint && npm run build && npm test && npm run e2e",
     "prepare": "husky"
   },
   "dependencies": {

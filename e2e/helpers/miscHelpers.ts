@@ -2,6 +2,7 @@ import { test, TestInfo } from "@playwright/test";
 
 import {
   PROJECT_NAME_DESKTOP_SAFARI,
+  PROJECT_NAME_FIREFOX,
   PROJECT_NAME_MOBILE_CHROME,
   PROJECT_NAME_MOBILE_SAFARI,
 } from "../../playwright.config.ts";
@@ -26,4 +27,20 @@ export function skipDesktopSafari(testInfo: TestInfo) {
 export function skipMobileSafari(testInfo: TestInfo) {
   const browser = testInfo.project.name;
   test.skip(browser === PROJECT_NAME_MOBILE_SAFARI, `Skipping test for ${PROJECT_NAME_MOBILE_SAFARI}`);
+}
+
+export function skipBrowsersWithoutOfflineEmulation(testInfo: TestInfo) {
+  const browser = testInfo.project.name;
+  test.skip(
+    browser === PROJECT_NAME_DESKTOP_SAFARI || browser === PROJECT_NAME_MOBILE_SAFARI,
+    "Playwright cannot emulate offline mode in WebKit while a service worker is active",
+  );
+}
+
+export function skipBrowsersWithoutOfflineNavigation(testInfo: TestInfo) {
+  skipBrowsersWithoutOfflineEmulation(testInfo);
+  test.skip(
+    testInfo.project.name === PROJECT_NAME_FIREFOX,
+    "Firefox rejects navigations to new URLs during offline emulation before the service worker can answer",
+  );
 }

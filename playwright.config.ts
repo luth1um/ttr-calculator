@@ -1,10 +1,14 @@
 import { defineConfig, devices } from "@playwright/test";
 
 export const PROJECT_NAME_DESKTOP_SAFARI = "webkit";
+export const PROJECT_NAME_FIREFOX = "firefox";
 export const PROJECT_NAME_MOBILE_CHROME = "Mobile Chrome";
 export const PROJECT_NAME_MOBILE_SAFARI = "Mobile Safari";
 
 export const TEST_BASE_URL = "http://localhost:5173/ttr-calculator/";
+
+// Serves the production build (the only build that containing a service worker)
+export const PREVIEW_BASE_URL = "http://localhost:4173/ttr-calculator/";
 
 /**
  * See https://playwright.dev/docs/test-configuration.
@@ -35,7 +39,7 @@ export default defineConfig({
     },
 
     {
-      name: "firefox",
+      name: PROJECT_NAME_FIREFOX,
       use: { ...devices["Desktop Firefox"] },
     },
 
@@ -59,9 +63,16 @@ export default defineConfig({
   snapshotPathTemplate: "{testDir}/__screenshots__/{testFilePath}/{arg}{ext}",
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: "npm start",
-    url: TEST_BASE_URL,
-    reuseExistingServer: !process.env.CI,
-  },
+  webServer: [
+    {
+      command: "npm start",
+      url: TEST_BASE_URL,
+      reuseExistingServer: !process.env.CI,
+    },
+    {
+      command: "npm run build && npm run preview",
+      url: PREVIEW_BASE_URL,
+      reuseExistingServer: !process.env.CI,
+    },
+  ],
 });

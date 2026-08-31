@@ -1,6 +1,6 @@
 import type { Page, Locator } from "@playwright/test";
 
-import { TEST_BASE_URL } from "../../playwright.config";
+import { PREVIEW_BASE_URL, TEST_BASE_URL } from "../../playwright.config";
 import { FALLBACK_LANGUAGE } from "../../src/i18n";
 
 export class AppPage {
@@ -192,5 +192,53 @@ export class AppPage {
 
   async scrollToWonToggleByIndex(index: number): Promise<void> {
     await this.getOpponentWonToggleByIndex(index).scrollIntoViewIfNeeded();
+  }
+
+  /** The service worker only exists in the production build, which is served by the preview server. */
+  async gotoProductionBuild(path: string = ""): Promise<void> {
+    await this.setLanguage(FALLBACK_LANGUAGE);
+    await this.page.goto(PREVIEW_BASE_URL + path);
+  }
+
+  async waitForServiceWorkerActivation(): Promise<void> {
+    await this.page.waitForFunction(async () => {
+      const registration = await navigator.serviceWorker.getRegistration();
+      return registration?.active?.state === "activated";
+    });
+  }
+
+  async isControlledByServiceWorker(): Promise<boolean> {
+    return this.page.evaluate(() => navigator.serviceWorker.controller !== null);
+  }
+
+  /** Paths of all precached files, relative to the base URL and without the Workbox revision parameter. */
+  async getPrecachedPaths(): Promise<string[]> {
+    return this.page.evaluate(async (baseUrl: string) => {
+      const cacheNames = await caches.keys();
+      const precacheName = cacheNames.find((name) => name.includes("precache"));
+      if (precacheName === undefined) {
+        return [];
+      }
+      const requests = await (await caches.open(precacheName)).keys();
+      return requests.map((request) => request.url.replace(baseUrl, "").replace(/\?__WB_REVISION__=.*$/, ""));
+    }, PREVIEW_BASE_URL);
+  }
+
+  async fetchStatus(path: string): Promise<number> {
+    return this.page.evaluate(async (url: string) => {
+      const response = await fetch(url);
+      return response.status;
+    }, PREVIEW_BASE_URL + path);
+  }
+
+  async fetchManifest(): Promise<Record<string, unknown>> {
+    return this.page.evaluate(async () => {
+      const href = document.querySelector("link[rel='manifest']")?.getAttribute("href") ?? "";
+      return (await fetch(href)).json() as Promise<Record<string, unknown>>;
+    });
+  }
+
+  async setOffline(offline: boolean): Promise<void> {
+    await this.page.context().setOffline(offline);
   }
 }

@@ -6,6 +6,8 @@ import { AppPage } from "./pages/AppPage";
 
 test.describe("The PWA capabilities", () => {
   test("register a service worker that controls the app when the app is first loaded", async ({ page }) => {
+    test.slow(); // because of gotoProductionBuild()
+
     // given
     const appPage = new AppPage(page);
 
@@ -18,6 +20,8 @@ test.describe("The PWA capabilities", () => {
   });
 
   test("precache the app shell, the icons, and all translations when the app is loaded", async ({ page }) => {
+    test.slow(); // because of gotoProductionBuild()
+
     // given
     const appPage = new AppPage(page);
 
@@ -46,6 +50,8 @@ test.describe("The PWA capabilities", () => {
   });
 
   test("provide a manifest that makes the app installable when the app is loaded", async ({ page }) => {
+    test.slow(); // because of gotoProductionBuild()
+
     // given
     const appPage = new AppPage(page);
 
@@ -70,6 +76,7 @@ test.describe("The PWA capabilities", () => {
 
   test("render the app when reloading while offline", async ({ page }, testInfo) => {
     skipBrowsersWithoutOfflineEmulation(testInfo);
+    test.slow(); // because of gotoProductionBuild()
 
     // given
     const appPage = new AppPage(page);
@@ -90,6 +97,7 @@ test.describe("The PWA capabilities", () => {
     page,
   }, testInfo) => {
     skipBrowsersWithoutOfflineEmulation(testInfo);
+    test.slow(); // because of gotoProductionBuild()
 
     // given
     const appPage = new AppPage(page);
@@ -108,6 +116,7 @@ test.describe("The PWA capabilities", () => {
 
   test("serve the app for an unknown deep link when offline", async ({ page }, testInfo) => {
     skipBrowsersWithoutOfflineNavigation(testInfo);
+    test.slow(); // because of gotoProductionBuild()
 
     // given
     const appPage = new AppPage(page);

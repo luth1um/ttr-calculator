@@ -98,10 +98,6 @@ export class AppPage {
     await locator.check();
   }
 
-  async uncheckFactor(locator: Locator): Promise<void> {
-    await locator.uncheck();
-  }
-
   async isFactorChecked(locator: Locator): Promise<boolean> {
     return locator.isChecked();
   }

@@ -203,7 +203,11 @@ export class AppPage {
   async waitForServiceWorkerActivation(): Promise<void> {
     await this.page.waitForFunction(async () => {
       const registration = await navigator.serviceWorker.getRegistration();
-      return registration?.active?.state === "activated";
+      return (
+        registration?.active?.state === "activated" &&
+        navigator.serviceWorker.controller !== undefined &&
+        navigator.serviceWorker.controller !== null
+      );
     });
   }
 

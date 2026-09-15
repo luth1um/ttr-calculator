@@ -80,13 +80,11 @@ test.describe("The PWA capabilities", () => {
 
     // given
     const appPage = new AppPage(page);
-    await appPage.gotoProductionBuild();
-    await appPage.waitForServiceWorkerActivation();
-    await expect.poll(() => appPage.getPrecachedPaths()).toContain("index.html");
+    await appPage.gotoProductionBuildAndWaitUntilOfflineReady();
 
     // when
     await appPage.setOffline(true);
-    await page.reload();
+    await appPage.reloadWhileOffline();
 
     // then
     await expect(appPage.appRoot).toBeVisible();
@@ -101,14 +99,11 @@ test.describe("The PWA capabilities", () => {
 
     // given
     const appPage = new AppPage(page);
-    await appPage.gotoProductionBuild();
-    await appPage.waitForServiceWorkerActivation();
-    await expect.poll(() => appPage.getPrecachedPaths()).toContain(LANGUAGE_FILE_PATHS[0]);
-    await expect.poll(() => appPage.isControlledByServiceWorker()).toBe(true);
+    await appPage.gotoProductionBuildAndWaitUntilOfflineReady();
 
     // when
     await appPage.setOffline(true);
-    const status = await appPage.fetchStatus(`${LANGUAGE_FILE_PATHS[0]}?v=cache-buster`);
+    const status = await appPage.fetchStatusWhileOffline(`${LANGUAGE_FILE_PATHS[0]}?v=cache-buster`);
 
     // then
     expect(status).toBe(200);
@@ -120,13 +115,11 @@ test.describe("The PWA capabilities", () => {
 
     // given
     const appPage = new AppPage(page);
-    await appPage.gotoProductionBuild();
-    await appPage.waitForServiceWorkerActivation();
-    await expect.poll(() => appPage.getPrecachedPaths()).toContain("index.html");
+    await appPage.gotoProductionBuildAndWaitUntilOfflineReady();
 
     // when
     await appPage.setOffline(true);
-    await appPage.gotoProductionBuild("unknown/deep/link");
+    await appPage.gotoProductionBuildWhileOffline("unknown/deep/link");
 
     // then
     await expect(appPage.appRoot).toBeVisible();

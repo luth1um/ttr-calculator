@@ -1,7 +1,10 @@
-import type { Page, Locator } from "@playwright/test";
+import { expect, type Locator, type Page } from "@playwright/test";
 
 import { PREVIEW_BASE_URL, TEST_BASE_URL } from "../../playwright.config";
-import { FALLBACK_LANGUAGE } from "../../src/i18n";
+import { FALLBACK_LANGUAGE, LANGUAGE_FILE_PATHS } from "../../src/i18n";
+
+/** Chromium sometimes routes the first offline navigation to the network instead of to the service worker. */
+const OFFLINE_NAVIGATION_RETRY = { intervals: [250, 500, 1_000, 2_000, 2_000], timeout: 30_000 };
 
 export class AppPage {
   readonly page: Page;
@@ -207,11 +210,55 @@ export class AppPage {
     });
   }
 
+  async gotoProductionBuildAndWaitUntilOfflineReady(path: string = ""): Promise<void> {
+    await this.gotoProductionBuild(path);
+    await this.waitForServiceWorkerActivation();
+    await this.waitForAppShellPrecache();
+    await this.wakeUpServiceWorker();
+  }
+
+  async reloadWhileOffline(): Promise<void> {
+    await expect(async () => {
+      await this.page.reload();
+    }).toPass(OFFLINE_NAVIGATION_RETRY);
+  }
+
+  async gotoProductionBuildWhileOffline(path: string = ""): Promise<void> {
+    await expect(async () => {
+      await this.page.goto(PREVIEW_BASE_URL + path);
+    }).toPass(OFFLINE_NAVIGATION_RETRY);
+  }
+
+  async fetchStatusWhileOffline(path: string): Promise<number> {
+    let status = 0;
+    await expect(async () => {
+      status = await this.fetchStatus(path);
+    }).toPass(OFFLINE_NAVIGATION_RETRY);
+    return status;
+  }
+
+  private async waitForAppShellPrecache(): Promise<void> {
+    await expect
+      .poll(() => this.getPrecachedPaths())
+      .toEqual(expect.arrayContaining(["index.html", ...LANGUAGE_FILE_PATHS]));
+  }
+
+  /**
+   * Chromium stops idle service workers, and restarting one while the browser is offline can fail, which makes
+   * the navigation fall back to the network. A request through the worker keeps it running.
+   */
+  private async wakeUpServiceWorker(): Promise<void> {
+    await this.page.evaluate(async (url: string) => {
+      const registration = await navigator.serviceWorker.ready;
+      registration.active?.postMessage({ type: "PING" });
+      await fetch(url, { cache: "no-store" });
+    }, PREVIEW_BASE_URL);
+  }
+
   async isControlledByServiceWorker(): Promise<boolean> {
     return this.page.evaluate(() => navigator.serviceWorker.controller !== null);
   }
 
-  /** Paths of all precached files, relative to the base URL and without the Workbox revision parameter. */
   async getPrecachedPaths(): Promise<string[]> {
     return this.page.evaluate(async (baseUrl: string) => {
       const cacheNames = await caches.keys();

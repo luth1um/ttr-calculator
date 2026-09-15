@@ -47,7 +47,6 @@
     "!(*.ts)": "oxfmt --no-error-on-unmatched-pattern"
   },
   "allowScripts": {
-    "fsevents@2.3.2": true,
     "fsevents@2.3.3": true
   }
 }

@@ -71,7 +71,7 @@ export default defineConfig({
       reuseExistingServer: !process.env.CI,
     },
     {
-      command: "npm run build && npm run preview",
+      command: process.env.CI ? "npm run preview" : "npm run build && npm run preview",
       url: PREVIEW_BASE_URL,
       reuseExistingServer: !process.env.CI,
     },

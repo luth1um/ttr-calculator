@@ -22,29 +22,6 @@ env:
   PLAYWRIGHT_BLOB_REPORT_FOLDER: "blob-report"
 
 jobs:
-  # Check linting and formatting
-  static-analysis:
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
-
-      - name: Set up Node.js
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 #v7.0.0
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: "npm"
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Linting
-        run: npx oxlint --deny-warnings --format=github
-
-      - name: Check formatting
-        run: npm run format:check
-
   # Build the project
   build:
     runs-on: ubuntu-latest
@@ -74,6 +51,29 @@ jobs:
           path: ${{ env.BUILD_ARTIFACT_FOLDER }}
           if-no-files-found: "error"
           retention-days: 1
+
+  # Check linting and formatting
+  static-analysis:
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 #v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 #v7.0.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Linting
+        run: npx oxlint --deny-warnings --format=github
+
+      - name: Check formatting
+        run: npm run format:check
 
   # Run unit tests
   test:

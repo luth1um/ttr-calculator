@@ -6,13 +6,13 @@ import { AppPage } from "./pages/AppPage";
 
 test.describe("The PWA capabilities", () => {
   test("register a service worker that controls the app when the app is first loaded", async ({ page }) => {
-    test.slow(); // because of gotoProductionBuild()
+    test.slow();
 
     // given
     const appPage = new AppPage(page);
 
     // when
-    await appPage.gotoProductionBuild();
+    await appPage.goto();
     await appPage.waitForServiceWorkerActivation();
 
     // then
@@ -20,13 +20,13 @@ test.describe("The PWA capabilities", () => {
   });
 
   test("precache the app shell, the icons, and all translations when the app is loaded", async ({ page }) => {
-    test.slow(); // because of gotoProductionBuild()
+    test.slow();
 
     // given
     const appPage = new AppPage(page);
 
     // when
-    await appPage.gotoProductionBuild();
+    await appPage.goto();
     await appPage.waitForServiceWorkerActivation();
 
     // then
@@ -50,13 +50,13 @@ test.describe("The PWA capabilities", () => {
   });
 
   test("provide a manifest that makes the app installable when the app is loaded", async ({ page }) => {
-    test.slow(); // because of gotoProductionBuild()
+    test.slow();
 
     // given
     const appPage = new AppPage(page);
 
     // when
-    await appPage.gotoProductionBuild();
+    await appPage.goto();
     const manifest = await appPage.fetchManifest();
 
     // then
@@ -76,11 +76,11 @@ test.describe("The PWA capabilities", () => {
 
   test("render the app when reloading while offline", async ({ page }, testInfo) => {
     skipBrowsersWithoutOfflineEmulation(testInfo);
-    test.slow(); // because of gotoProductionBuild()
+    test.slow();
 
     // given
     const appPage = new AppPage(page);
-    await appPage.gotoProductionBuildAndWaitUntilOfflineReady();
+    await appPage.gotoAndWaitUntilOfflineReady();
 
     // when
     await appPage.setOffline(true);
@@ -95,11 +95,11 @@ test.describe("The PWA capabilities", () => {
     page,
   }, testInfo) => {
     skipBrowsersWithoutOfflineEmulation(testInfo);
-    test.slow(); // because of gotoProductionBuild()
+    test.slow();
 
     // given
     const appPage = new AppPage(page);
-    await appPage.gotoProductionBuildAndWaitUntilOfflineReady();
+    await appPage.gotoAndWaitUntilOfflineReady();
 
     // when
     await appPage.setOffline(true);
@@ -111,15 +111,15 @@ test.describe("The PWA capabilities", () => {
 
   test("serve the app for an unknown deep link when offline", async ({ page }, testInfo) => {
     skipBrowsersWithoutOfflineNavigation(testInfo);
-    test.slow(); // because of gotoProductionBuild()
+    test.slow();
 
     // given
     const appPage = new AppPage(page);
-    await appPage.gotoProductionBuildAndWaitUntilOfflineReady();
+    await appPage.gotoAndWaitUntilOfflineReady();
 
     // when
     await appPage.setOffline(true);
-    await appPage.gotoProductionBuildWhileOffline("unknown/deep/link");
+    await appPage.gotoWhileOffline("unknown/deep/link");
 
     // then
     await expect(appPage.appRoot).toBeVisible();

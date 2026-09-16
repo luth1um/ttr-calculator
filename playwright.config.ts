@@ -6,11 +6,11 @@ export const PROJECT_NAME_DESKTOP_CHROME = "chromium";
 export const PROJECT_NAME_MOBILE_CHROME = "Mobile Chrome";
 export const PROJECT_NAME_MOBILE_SAFARI = "Mobile Safari";
 
-export const TEST_BASE_URL = "http://localhost:5173/ttr-calculator/";
-
-// Serves the production build (the only build that containing a service worker)
+/**
+ * Serves the production build (needed for PWA service worker). Do not use the dev server (port 5173) as some E2E
+ * tests for the PWA functionality only work with the production build.
+ */
 export const PREVIEW_BASE_URL = "http://localhost:4173/ttr-calculator/";
-
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
@@ -64,16 +64,9 @@ export default defineConfig({
   snapshotPathTemplate: "{testDir}/__screenshots__/{testFilePath}/{arg}{ext}",
 
   /* Run your local dev server before starting the tests */
-  webServer: [
-    {
-      command: "npm start",
-      url: TEST_BASE_URL,
-      reuseExistingServer: !process.env.CI,
-    },
-    {
-      command: process.env.CI ? "npm run preview" : "npm run build && npm run preview",
-      url: PREVIEW_BASE_URL,
-      reuseExistingServer: !process.env.CI,
-    },
-  ],
+  webServer: {
+    command: process.env.CI ? "npm run preview" : "npm run build && npm run preview",
+    url: PREVIEW_BASE_URL,
+    reuseExistingServer: !process.env.CI,
+  },
 });

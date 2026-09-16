@@ -1,6 +1,6 @@
 import { expect, type Locator, type Page } from "@playwright/test";
 
-import { PREVIEW_BASE_URL, TEST_BASE_URL } from "../../playwright.config";
+import { PREVIEW_BASE_URL } from "../../playwright.config";
 import { FALLBACK_LANGUAGE, LANGUAGE_FILE_PATHS } from "../../src/i18n";
 
 /** Chromium sometimes routes the first offline navigation to the network instead of to the service worker. */
@@ -49,17 +49,17 @@ export class AppPage {
     this.playerFactorsLegend = page.locator(".player-factors > .group-legend");
   }
 
-  async goto(): Promise<void> {
-    await this.gotoWithLanguage(FALLBACK_LANGUAGE);
+  async goto(path: string = ""): Promise<void> {
+    await this.gotoWithLanguage(FALLBACK_LANGUAGE, path);
   }
 
   async reload(): Promise<void> {
     await this.reloadWithLanguage(FALLBACK_LANGUAGE);
   }
 
-  async gotoWithLanguage(language: string): Promise<void> {
+  async gotoWithLanguage(language: string, path: string = ""): Promise<void> {
     await this.setLanguage(language);
-    await this.page.goto(TEST_BASE_URL);
+    await this.page.goto(PREVIEW_BASE_URL + path);
   }
 
   async reloadWithLanguage(language: string): Promise<void> {
@@ -193,12 +193,6 @@ export class AppPage {
     await this.getOpponentWonToggleByIndex(index).scrollIntoViewIfNeeded();
   }
 
-  /** The service worker only exists in the production build, which is served by the preview server. */
-  async gotoProductionBuild(path: string = ""): Promise<void> {
-    await this.setLanguage(FALLBACK_LANGUAGE);
-    await this.page.goto(PREVIEW_BASE_URL + path);
-  }
-
   async waitForServiceWorkerActivation(): Promise<void> {
     await this.page.waitForFunction(async () => {
       const registration = await navigator.serviceWorker.getRegistration();
@@ -210,8 +204,8 @@ export class AppPage {
     });
   }
 
-  async gotoProductionBuildAndWaitUntilOfflineReady(path: string = ""): Promise<void> {
-    await this.gotoProductionBuild(path);
+  async gotoAndWaitUntilOfflineReady(path: string = ""): Promise<void> {
+    await this.goto(path);
     await this.waitForServiceWorkerActivation();
     await this.waitForAppShellPrecache();
     await this.wakeUpServiceWorker();
@@ -223,7 +217,7 @@ export class AppPage {
     }).toPass(OFFLINE_NAVIGATION_RETRY);
   }
 
-  async gotoProductionBuildWhileOffline(path: string = ""): Promise<void> {
+  async gotoWhileOffline(path: string = ""): Promise<void> {
     await expect(async () => {
       await this.page.goto(PREVIEW_BASE_URL + path);
     }).toPass(OFFLINE_NAVIGATION_RETRY);

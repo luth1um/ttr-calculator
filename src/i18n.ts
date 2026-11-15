@@ -1,4 +1,4 @@
-import i18next from "i18next";
+import i18next, { TFunction } from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 import Backend from "i18next-http-backend";
 
@@ -35,10 +35,7 @@ export async function init(): Promise<void> {
   }
 }
 
-export function t(key: string, options?: Record<string, unknown>): string {
-  const fn = i18next.t.bind(i18next) as (key: string, options?: Record<string, unknown>) => string;
-  return fn(key, options);
-}
+export const t: TFunction = i18next.t.bind(i18next);
 
 export function formatNumber(value: number, options?: Intl.NumberFormatOptions): string {
   return new Intl.NumberFormat(resolveDisplayLocale(), options).format(value);

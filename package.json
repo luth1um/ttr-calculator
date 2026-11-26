@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "i18next": "27.2.2",
-    "i18next-browser-languagedetector": "8.3.0",
+    "i18next-browser-languagedetector": "8.3.1",
     "i18next-http-backend": "4.1.0",
     "ttr-calculator-typescript": "2.0.4"
   },
